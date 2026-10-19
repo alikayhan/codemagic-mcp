@@ -37,7 +37,7 @@ try {
     try {
       await client.connect(transport);
       const { tools } = await client.listTools();
-      assert.equal(tools.length, configured ? 14 : 1);
+      assert.equal(tools.length, configured ? 17 : 1);
       if (!configured) {
         assert.equal(tools[0].name, 'cm_setup_status');
         const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });

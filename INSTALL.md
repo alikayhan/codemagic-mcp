@@ -85,8 +85,8 @@ command = "node"
 args = ["SERVER"]
 
 [mcp_servers.codemagic.env]
-CODEMAGIC_MODE = "read-only"
-CODEMAGIC_TOOLSET = "core"
+CODEMAGIC_MODE = "builds"     # or "read-only" for inspection only, "all" for administration
+CODEMAGIC_TOOLSET = "core"    # or "all" for the full API
 ```
 
 See [Codex's MCP configuration docs](https://developers.openai.com/codex/mcp) for where the file lives.
@@ -114,7 +114,7 @@ Do not install both option A and option B in the same Codex client, or you will 
 
 Ask your agent: **"List my Codemagic teams and their apps, then show the latest builds."**
 
-The server starts in read-only mode with the core toolset. `cm_list_apps` can be empty when apps belong to teams; the agent should call `cm_list_teams` and then `cm_list_team_apps`.
+The server starts in `builds` mode with the core toolset: it can read everything and can start or cancel builds, delete caches and create artifact links. `cm_list_apps` can be empty when apps belong to teams; the agent should call `cm_list_teams` and then `cm_list_team_apps`.
 
 ## Setup prompt for a coding agent
 
@@ -139,15 +139,15 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
 
 5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
-6. Report what you did, the exact config you added, and which of these follow-ups I can choose: the server is read-only by default; `node SERVER configure --mode builds` enables build start/cancel, and `--toolset all` exposes the full API. Do not run those for me.
+6. Report what you did, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `node SERVER configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me.
 ````
 
 ## Permissions and updates
 
-Defaults are `CODEMAGIC_MODE=read-only` and `CODEMAGIC_TOOLSET=core`. To allow triggering and cancelling builds:
+Defaults are `CODEMAGIC_MODE=builds` and `CODEMAGIC_TOOLSET=core`. Starting a build can cost money and, depending on the workflow, publish a release. To restrict the server to inspection only:
 
 ```sh
-node SERVER configure --mode builds
+node SERVER configure --mode read-only
 ```
 
 Press Enter at the token prompt to keep your saved token. Use `--toolset all` for the broader API and `--mode all` only when you want administrative writes, including membership, billing, variables, sharing and deletion. Restart the MCP connection after changes. Supplying a new token at the prompt replaces the saved token atomically.

@@ -1,5 +1,5 @@
 export function readConfig(env = process.env) {
-  const mode = env.CODEMAGIC_MODE || 'read-only';
+  const mode = env.CODEMAGIC_MODE || 'builds';
   const toolset = env.CODEMAGIC_TOOLSET || 'core';
   const timeoutMs = Number(env.CODEMAGIC_TIMEOUT_MS || 30_000);
   if (!['read-only', 'builds', 'all'].includes(mode)) throw new Error('CODEMAGIC_MODE must be read-only, builds or all.');

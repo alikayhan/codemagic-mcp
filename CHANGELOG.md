@@ -15,6 +15,7 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 
 ### Changed
 
+- Default `CODEMAGIC_MODE` is now `builds` instead of `read-only`, and `builds` mode now also covers deleting caches and creating public artifact links in addition to starting and cancelling builds. The everyday developer loop works out of the box; set `CODEMAGIC_MODE=read-only` for inspection only. Administrative writes still require `all`.
 - Project is named `codemagic-mcp` everywhere, including the license copyright line and the Codex plugin display names, so "Codemagic" alone only ever refers to the trademark or the API.
 - Without a token the API tools are no longer registered, so a half-configured server can no longer look ready. Previously all tools were listed and each call failed with a hint.
 

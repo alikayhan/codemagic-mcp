@@ -16,7 +16,7 @@
       "interface": {
         "displayName": "codemagic-mcp (unofficial)",
         "shortDescription": "Unofficial: apps, builds, and workflows in Codemagic",
-        "longDescription": "An independent community integration, not made or endorsed by Codemagic or Nevercode Ltd. Connect your own token locally; start with read-only access and optionally enable build or administration tools.",
+        "longDescription": "An independent community integration, not made or endorsed by Codemagic or Nevercode Ltd. Connect your own token locally. Build, cache and artifact-link tools are on by default; switch to read-only or enable administration tools as you prefer.",
         "category": "Coding",
         "capabilities": [
           "Read",

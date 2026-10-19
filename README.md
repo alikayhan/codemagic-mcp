@@ -84,8 +84,8 @@ command = "node"
 args = ["SERVER"]
 
 [mcp_servers.codemagic.env]
-CODEMAGIC_MODE = "read-only"
-CODEMAGIC_TOOLSET = "core"
+CODEMAGIC_MODE = "builds"     # or "read-only" for inspection only, "all" for administration
+CODEMAGIC_TOOLSET = "core"    # or "all" for the full API
 ```
 
 **Codex, as a plugin** from the release ZIP's local marketplace: see [INSTALL.md](INSTALL.md).
@@ -94,7 +94,7 @@ CODEMAGIC_TOOLSET = "core"
 
 Ask your agent: *"List my Codemagic teams and their apps, then show the latest builds."*
 
-The server is read-only by default. See [Toolsets and permissions](#toolsets-and-permissions) to enable build triggering or administrative writes.
+By default the server can read everything and can start or cancel builds, delete caches and create artifact links. Starting a build can cost money and, depending on the workflow, publish a release. See [Toolsets and permissions](#toolsets-and-permissions) to restrict it to read-only or to enable administrative writes.
 
 ## Setup prompt for a coding agent
 
@@ -119,7 +119,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
 
 5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
-6. Report what you did, the exact config you added, and which of these follow-ups I can choose: the server is read-only by default; `node SERVER configure --mode builds` enables build start/cancel, and `--toolset all` exposes the full API. Do not run those for me.
+6. Report what you did, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `node SERVER configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me.
 ````
 
 ## Coverage
@@ -146,19 +146,19 @@ The workflow endpoint reports workflows known to Codemagic. If a newly added YAM
 | --- | --- | --- |
 | `CODEMAGIC_API_TOKEN` | unset | Personal API token, needed for API calls |
 | `CODEMAGIC_TOOLSET` | `core` | `core` exposes 12–19 everyday tools; `all` exposes 64–106 tools |
-| `CODEMAGIC_MODE` | `read-only` | `read-only`: GET operations; `builds`: also start/cancel builds; `all`: all implemented mutations |
+| `CODEMAGIC_MODE` | `builds` | `read-only`: GET operations only; `builds`: also start/cancel builds, delete caches, create artifact links; `all`: every implemented mutation |
 | `CODEMAGIC_TIMEOUT_MS` | `30000` | Integer from 100 to 120000 |
 | `CODEMAGIC_CONFIG_DIR` | `~/.config/codemagic-mcp` | Absolute directory holding `credentials.env` |
 
 Set these through your client's environment configuration, or persist mode and toolset alongside the token:
 
 ```sh
-node SERVER configure --mode builds --toolset core
+node SERVER configure --mode read-only --toolset core
 ```
 
 Press Enter at the token prompt to keep the saved token. Reconnect or restart the client after changing configuration.
 
-Toolset and mode are independent. `all` + `read-only` exposes broader inspection without mutations. `all` + `all` also permits billing, membership, secret, deletion, invitation, and sharing operations. Disabled tools are absent from the MCP catalog and cannot be invoked by name. These are local exposure controls, not replacements for Codemagic's server-side permissions or your MCP client's approvals.
+Toolset and mode are independent. `core` + `read-only` is the safest setting for shared or untrusted agents. `all` + `read-only` exposes broader inspection without mutations. `all` + `all` also permits billing, membership, secret, deletion, invitation, and sharing operations. Disabled tools are absent from the MCP catalog and cannot be invoked by name. These are local exposure controls, not replacements for Codemagic's server-side permissions or your MCP client's approvals.
 
 ## Examples
 
@@ -176,7 +176,7 @@ List builds:
 }
 ```
 
-Start a build with `CODEMAGIC_MODE=builds`:
+Start a build (available in the default `builds` mode):
 
 ```json
 {
