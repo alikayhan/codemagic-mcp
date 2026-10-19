@@ -1,4 +1,6 @@
-# Install Codemagic MCP (community)
+# Install codemagic-mcp
+
+**Unofficial community MCP server for the Codemagic API.** The project name is `codemagic-mcp`; it is not a Codemagic product.
 
 > **Disclaimer.** This is an independent, community-built project. It is **not** made, endorsed, supported, or reviewed by Codemagic or Nevercode Ltd. "Codemagic" is a trademark of Nevercode Ltd, used here only to describe the public API this server talks to. Nothing here is official. Use at your own risk.
 
@@ -102,7 +104,7 @@ codex plugin add codemagic@codemagic-community
 
 Start a new local Codex chat. If the plugin is not visible in the desktop plugin picker yet, restart Codex.
 
-If your Codex version lacks `plugin add`, register the marketplace with the supported CLI, then install **Codemagic** from **Codemagic Community** in the desktop Plugins directory. Update Codex if local marketplaces or portable manifests are unsupported. See [OpenAI's desktop plugin guidance](https://developers.openai.com/plugins/deploy/desktop-only).
+If your Codex version lacks `plugin add`, register the marketplace with the supported CLI, then install **codemagic-mcp (unofficial)** from **codemagic-mcp community** in the desktop Plugins directory. Update Codex if local marketplaces or portable manifests are unsupported. See [OpenAI's desktop plugin guidance](https://developers.openai.com/plugins/deploy/desktop-only).
 
 The plugin's `mcp.json` launches `dist/server.mjs` with `node`, so Node must be discoverable by the Codex process.
 
@@ -119,7 +121,7 @@ The server starts in read-only mode with the core toolset. `cm_list_apps` can be
 Paste the following into Claude Code, Codex, Cursor, or any other coding agent, after replacing the path on the first line. The agent will register the server for you but must never ask for or handle your token; you enter that yourself in a terminal.
 
 ````text
-Set up the community Codemagic MCP server located at: /ABSOLUTE/PATH/TO/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, located at: /ABSOLUTE/PATH/TO/codemagic-mcp
 
 This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server.
 

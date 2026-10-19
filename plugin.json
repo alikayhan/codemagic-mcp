@@ -14,7 +14,7 @@
     "com.openai": {
       "requires_local_executor": true,
       "interface": {
-        "displayName": "Codemagic",
+        "displayName": "codemagic-mcp (unofficial)",
         "shortDescription": "Unofficial: apps, builds, and workflows in Codemagic",
         "longDescription": "An independent community integration, not made or endorsed by Codemagic or Nevercode Ltd. Connect your own token locally; start with read-only access and optionally enable build or administration tools.",
         "category": "Coding",

@@ -1,4 +1,6 @@
-# Codemagic MCP (community)
+# codemagic-mcp
+
+**Unofficial community MCP server for the Codemagic API.** The project name is `codemagic-mcp`; it is not a Codemagic product.
 
 [![CI](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -99,7 +101,7 @@ The server is read-only by default. See [Toolsets and permissions](#toolsets-and
 Paste the following into Claude Code, Codex, Cursor, or any other coding agent, after replacing the path on the first line. The agent will register the server for you but must never ask for or handle your token; you enter that yourself in a terminal.
 
 ````text
-Set up the community Codemagic MCP server located at: /ABSOLUTE/PATH/TO/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, located at: /ABSOLUTE/PATH/TO/codemagic-mcp
 
 This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server.
 

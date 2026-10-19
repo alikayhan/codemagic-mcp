@@ -40,7 +40,7 @@ for (const dir of [...dependencyDirectories].sort()) {
 await writeFile(join(dist, 'THIRD_PARTY_LICENSES.txt'), notices.join('\n\n---\n\n'));
 const paths = ['plugin.json', 'mcp.json', 'dist/server.mjs', 'dist/THIRD_PARTY_LICENSES.txt', 'schema/operations.json', 'README.md', 'INSTALL.md', 'LICENSE', 'NOTICE', 'docs/coverage.md'];
 const marketplace = {
-  name: 'codemagic-community', interface: { displayName: 'Codemagic Community' },
+  name: 'codemagic-community', interface: { displayName: 'codemagic-mcp community' },
   plugins: [{ name: 'codemagic', source: { source: 'local', path: './plugins/codemagic' }, policy: { installation: 'AVAILABLE', authentication: 'ON_USE' }, category: 'Coding' }],
 };
 const release = join(root, 'release');

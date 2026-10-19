@@ -15,6 +15,7 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 
 ### Changed
 
+- Project is named `codemagic-mcp` everywhere, including the license copyright line and the Codex plugin display names, so "Codemagic" alone only ever refers to the trademark or the API.
 - Without a token the API tools are no longer registered, so a half-configured server can no longer look ready. Previously all tools were listed and each call failed with a hint.
 
 ## [0.1.0] - 2026-10-19
