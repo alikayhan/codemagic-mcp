@@ -152,10 +152,12 @@ Press Enter at the token prompt to keep your saved token. Use `--toolset all` fo
 
 These settings persist across plugin upgrades and removal, and across any client. To update, extract the newer release and point your client or marketplace at it; rerun `configure` only if you want to change settings. To remove credentials completely, delete `credentials.env` yourself and revoke the token in Codemagic if appropriate.
 
-## Sharing with others
+## Updates and help
 
-Share the release ZIP. Each person extracts it, saves their own token with `configure`, and connects their client. The ZIP contains no tokens, company IDs or local paths. It is not published to npm or to any public plugin directory.
+New versions are published as [GitHub Releases](https://github.com/alikayhan/codemagic-mcp/releases) with the changelog section as release notes. To update a checkout, `git pull` and run `npm ci --ignore-scripts` again. To update a ZIP install, extract the new release and point your client or marketplace at it. Saved credentials and settings survive both.
 
 Supported operations and limitations are described in the bundled README and `docs/coverage.md`. Read-only apps, team apps and build history have been verified against a live account; most administrative operations are tested with fixtures rather than live mutations.
+
+Questions and bugs go to the [issue tracker](https://github.com/alikayhan/codemagic-mcp/issues). Security problems should be reported privately; see [SECURITY.md](https://github.com/alikayhan/codemagic-mcp/blob/main/SECURITY.md). Never include your API token in an issue, log, or screenshot.
 
 This project is not affiliated with Codemagic or Nevercode Ltd, and Codemagic does not support it.

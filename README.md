@@ -1,5 +1,9 @@
 # Codemagic MCP (community)
 
+[![CI](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Changelog](https://img.shields.io/badge/changelog-keep%20a%20changelog-orange.svg)](CHANGELOG.md)
+
 > **Disclaimer.** This is an independent, community-built project. It is **not** made, endorsed, supported, or reviewed by Codemagic or Nevercode Ltd. "Codemagic" is a trademark of Nevercode Ltd and is used here only to describe which public API this server talks to. Nothing in this repository is official. Use it at your own risk, and direct Codemagic product questions to Codemagic, not to this project.
 
 A standard [Model Context Protocol](https://modelcontextprotocol.io) server, over stdio, for the public Codemagic REST API. Point any MCP-capable client at it (Claude Code, Codex, Cursor, Claude Desktop, or anything else that can launch a local `mcpServers` command) to list apps and teams, inspect build history, and optionally trigger or cancel builds and manage team settings. Each installation uses the user's own Codemagic API token. Nothing is hosted, and no shared credentials or company-specific IDs are bundled.
@@ -246,6 +250,14 @@ Output: `release/codemagic-plugin-0.1.0.zip`, its SHA-256 file, and an extracted
 **Updating the API contract:** run `npm run schema:update`, or `node scripts/update-schema.js /path/to/openapi.json` with a downloaded specification. Review the generated diff, permissions and names, then run checks and tests. The schema is never refreshed at server startup. The generator resolves local references, uses strict object fields, and normalizes upstream overlapping `oneOf` type unions into `anyOf` (notably integer/number build inputs). Build branch/tag exclusivity is validated separately.
 
 The test suite exercises MCP discovery and calls, stdio startup, request routing, validation, mode restrictions, pagination, timeout and error behavior, and credential handling. Administrative writes and non-macOS runtime behavior still need live acceptance testing.
+
+## Contributing, security and support
+
+Contributions are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) covers the development setup, the test and schema workflow, and what a pull request needs (a changelog entry, passing checks, no credentials in fixtures). Pull requests are squash-merged, and the PR title becomes the commit message on `main`.
+
+Report security issues privately through [GitHub's vulnerability reporting](https://github.com/alikayhan/codemagic-mcp/security/advisories/new) rather than in a public issue. [SECURITY.md](SECURITY.md) describes what is in scope and how token handling is designed. Never include an API token in an issue, log, or screenshot; redact it and revoke it in Codemagic if it was exposed.
+
+For bugs and questions use the [issue tracker](https://github.com/alikayhan/codemagic-mcp/issues). This is a volunteer project with no service-level commitment. Codemagic itself provides no support for it.
 
 ## Sources and license
 
