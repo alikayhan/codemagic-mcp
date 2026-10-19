@@ -8,6 +8,10 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 
 ## [Unreleased]
 
+### Changed
+
+- The coding-agent setup prompt in README.md and INSTALL.md now starts by cloning the GitHub repository instead of assuming a pre-existing local path.
+
 ## [0.1.0] - 2026-10-19
 
 Initial release.
