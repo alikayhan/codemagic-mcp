@@ -1,11 +1,12 @@
 import { homedir } from 'node:os';
-import { join, isAbsolute } from 'node:path';
+import { join, dirname, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { parseEnv } from 'node:util';
 import { constants, openSync, closeSync, readFileSync, writeFileSync, mkdirSync, lstatSync, chmodSync, renameSync, unlinkSync, fsyncSync } from 'node:fs';
-import { readConfig } from './config.js';
+import { readConfig, MODES, TOOLSETS, DEFAULT_MODE, DEFAULT_TOOLSET } from './config.js';
 
 const keys = ['CODEMAGIC_API_TOKEN', 'CODEMAGIC_MODE', 'CODEMAGIC_TOOLSET', 'CODEMAGIC_TIMEOUT_MS'];
+export const CONFIGURE_USAGE = `configure [--mode ${MODES.join('|')}] [--toolset ${TOOLSETS.join('|')}]`;
 export function credentialsPath(env = process.env) {
   const directory = env.CODEMAGIC_CONFIG_DIR || join(homedir(), '.config', 'codemagic-mcp');
   if (!isAbsolute(directory)) throw new Error('CODEMAGIC_CONFIG_DIR must be an absolute path.');
@@ -22,7 +23,7 @@ export function readSavedSettings(env = process.env) {
   const path = credentialsPath(env);
   let fd;
   try {
-    checkPrivate(join(path, '..'), true);
+    checkPrivate(dirname(path), true);
     checkPrivate(path);
     fd = openSync(path, constants.O_RDONLY | (constants.O_NOFOLLOW || 0));
     const raw = readFileSync(fd, 'utf8');
@@ -43,12 +44,12 @@ export function saveSettings(token, options = {}, env = process.env) {
   const settings = {
     ...existing,
     CODEMAGIC_API_TOKEN: token,
-    CODEMAGIC_MODE: options.mode ?? existing.CODEMAGIC_MODE ?? 'builds',
-    CODEMAGIC_TOOLSET: options.toolset ?? existing.CODEMAGIC_TOOLSET ?? 'core',
+    CODEMAGIC_MODE: options.mode ?? existing.CODEMAGIC_MODE ?? DEFAULT_MODE,
+    CODEMAGIC_TOOLSET: options.toolset ?? existing.CODEMAGIC_TOOLSET ?? DEFAULT_TOOLSET,
   };
   readConfig(settings);
   const path = credentialsPath(env);
-  const directory = join(path, '..');
+  const directory = dirname(path);
   mkdirSync(directory, { recursive: true, mode: 0o700 });
   checkPrivate(directory, true);
   const temporary = join(directory, `.credentials-${randomUUID()}.tmp`);
@@ -82,16 +83,17 @@ export function readHiddenToken(input = process.stdin, output = process.stderr) 
       if (!originallyFlowing) input.pause();
       output.write('\n');
     };
-    const onError = () => { cleanup(); reject(new Error('Token entry failed. Nothing was saved.')); };
-    const onEnd = () => { cleanup(); reject(new Error('Token entry ended. Nothing was saved.')); };
+    const fail = message => { cleanup(); reject(new Error(`${message} Nothing was saved.`)); };
+    const onError = () => fail('Token entry failed.');
+    const onEnd = () => fail('Token entry ended.');
     const onData = chunk => {
       for (const char of chunk.toString('utf8')) {
-        if (char === '\u0003' || char === '\u0004') { cleanup(); reject(new Error('Token entry cancelled. Nothing was saved.')); return; }
+        if (char === '\u0003' || char === '\u0004') return fail('Token entry cancelled.');
         if (char === '\r' || char === '\n') { cleanup(); resolve(value.trim()); return; }
         if (char === '\u007f' || char === '\b') value = value.slice(0, -1);
         else if (char >= ' ' && char <= '~') value += char;
-        else { cleanup(); reject(new Error('Unsupported control character in token entry. Nothing was saved.')); return; }
-        if (value.length > 8192) { cleanup(); reject(new Error('Token is too long. Nothing was saved.')); return; }
+        else return fail('Unsupported control character in token entry.');
+        if (value.length > 8192) return fail('Token is too long.');
       }
     };
     input.on('data', onData); input.once('end', onEnd); input.once('error', onError);
@@ -100,7 +102,7 @@ export function readHiddenToken(input = process.stdin, output = process.stderr) 
 export async function configure(args, env = process.env) {
   const options = {};
   for (let i = 0; i < args.length; i += 2) {
-    if (!['--mode', '--toolset'].includes(args[i]) || !args[i + 1]) throw new Error('Usage: configure [--mode read-only|builds|all] [--toolset core|all]. Do not pass a token as an argument.');
+    if (!['--mode', '--toolset'].includes(args[i]) || !args[i + 1]) throw new Error(`Usage: ${CONFIGURE_USAGE}. Do not pass a token as an argument.`);
     options[args[i].slice(2)] = args[i + 1];
   }
   readConfig({ CODEMAGIC_MODE: options.mode, CODEMAGIC_TOOLSET: options.toolset });
