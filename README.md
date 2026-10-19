@@ -1,4 +1,10 @@
-# Codemagic MCP (community)
+# codemagic-mcp
+
+**Unofficial community MCP server for the Codemagic API.** The project name is `codemagic-mcp`; it is not a Codemagic product.
+
+[![CI](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/alikayhan/codemagic-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Changelog](https://img.shields.io/badge/changelog-keep%20a%20changelog-orange.svg)](CHANGELOG.md)
 
 > **Disclaimer.** This is an independent, community-built project. It is **not** made, endorsed, supported, or reviewed by Codemagic or Nevercode Ltd. "Codemagic" is a trademark of Nevercode Ltd and is used here only to describe which public API this server talks to. Nothing in this repository is official. Use it at your own risk, and direct Codemagic product questions to Codemagic, not to this project.
 
@@ -42,6 +48,8 @@ node SERVER configure
 ```
 
 This prompts for the token without echoing it and writes it to `~/.config/codemagic-mcp/credentials.env` (directory mode 0700, file mode 0600 on macOS/Linux). Do not paste the token into a chat, a command argument, or a client config file. Alternatively, supply `CODEMAGIC_API_TOKEN` through your client's environment configuration; environment values override the saved file. The server never reads a `.env` from the current directory or from a repository.
+
+Without a token the server still starts, but in **setup mode**: it exposes a single tool, `cm_setup_status`, which returns the configure command and the credentials file location, and no API tools. Reconnect the server after running `configure` and the full tool list appears.
 
 ### 3. Connect your MCP client
 
@@ -93,7 +101,7 @@ The server is read-only by default. See [Toolsets and permissions](#toolsets-and
 Paste the following into Claude Code, Codex, Cursor, or any other coding agent, after replacing the path on the first line. The agent will register the server for you but must never ask for or handle your token; you enter that yourself in a terminal.
 
 ````text
-Set up the community Codemagic MCP server located at: /ABSOLUTE/PATH/TO/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, located at: /ABSOLUTE/PATH/TO/codemagic-mcp
 
 This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server.
 
@@ -101,7 +109,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
 
 2. Find the server entry point inside that path. Prefer `dist/server.mjs` if it exists (dependencies are bundled). Otherwise use `src/cli.js` after running `npm ci --ignore-scripts` in that folder. For an extracted release ZIP the file is `plugins/codemagic/dist/server.mjs`. Call the absolute path SERVER.
 
-3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done.
+3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done. Until then the server runs in setup mode and exposes only `cm_setup_status`.
 
 4. Register the server in the MCP client you are running in, using the `node` command with SERVER as the single argument and the server name `codemagic`:
    - Claude Code: `claude mcp add --scope user codemagic -- node SERVER`
@@ -109,7 +117,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
    - Cursor, Claude Desktop, Windsurf, or others: add `"codemagic": { "command": "node", "args": ["SERVER"] }` under `mcpServers` in the client's MCP config file. Ask me which client if you cannot tell.
    Do not put any token or environment secret into the config. Do not change or remove other MCP entries.
 
-5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server with tools such as `cm_list_teams` appears. If a restart is required, tell me.
+5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
 6. Report what you did, the exact config you added, and which of these follow-ups I can choose: the server is read-only by default; `node SERVER configure --mode builds` enables build start/cancel, and `--toolset all` exposes the full API. Do not run those for me.
 ````
@@ -244,6 +252,14 @@ Output: `release/codemagic-plugin-0.1.0.zip`, its SHA-256 file, and an extracted
 **Updating the API contract:** run `npm run schema:update`, or `node scripts/update-schema.js /path/to/openapi.json` with a downloaded specification. Review the generated diff, permissions and names, then run checks and tests. The schema is never refreshed at server startup. The generator resolves local references, uses strict object fields, and normalizes upstream overlapping `oneOf` type unions into `anyOf` (notably integer/number build inputs). Build branch/tag exclusivity is validated separately.
 
 The test suite exercises MCP discovery and calls, stdio startup, request routing, validation, mode restrictions, pagination, timeout and error behavior, and credential handling. Administrative writes and non-macOS runtime behavior still need live acceptance testing.
+
+## Contributing, security and support
+
+Contributions are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) covers the development setup, the test and schema workflow, and what a pull request needs (a changelog entry, passing checks, no credentials in fixtures). Pull requests are squash-merged, and the PR title becomes the commit message on `main`.
+
+Report security issues privately through [GitHub's vulnerability reporting](https://github.com/alikayhan/codemagic-mcp/security/advisories/new) rather than in a public issue. [SECURITY.md](SECURITY.md) describes what is in scope and how token handling is designed. Never include an API token in an issue, log, or screenshot; redact it and revoke it in Codemagic if it was exposed.
+
+For bugs and questions use the [issue tracker](https://github.com/alikayhan/codemagic-mcp/issues). This is a volunteer project with no service-level commitment. Codemagic itself provides no support for it.
 
 ## Sources and license
 

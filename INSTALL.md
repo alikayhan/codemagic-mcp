@@ -1,4 +1,6 @@
-# Install Codemagic MCP (community)
+# Install codemagic-mcp
+
+**Unofficial community MCP server for the Codemagic API.** The project name is `codemagic-mcp`; it is not a Codemagic product.
 
 > **Disclaimer.** This is an independent, community-built project. It is **not** made, endorsed, supported, or reviewed by Codemagic or Nevercode Ltd. "Codemagic" is a trademark of Nevercode Ltd, used here only to describe the public API this server talks to. Nothing here is official. Use at your own risk.
 
@@ -50,6 +52,8 @@ Set `CODEMAGIC_CONFIG_DIR` to an absolute directory to override the location. Th
 
 You can instead provide `CODEMAGIC_API_TOKEN` through your MCP client's environment configuration. Environment values override saved values. The server never loads a `.env` file from a repository or the current working directory.
 
+Without a token the server still starts, but in **setup mode**: it exposes a single tool, `cm_setup_status`, which returns the configure command and the credentials file location, and no API tools. Reconnect the server after running `configure` and the full tool list appears.
+
 ## Step 2, option A: connect as a plain MCP server
 
 **Claude Code**
@@ -100,7 +104,7 @@ codex plugin add codemagic@codemagic-community
 
 Start a new local Codex chat. If the plugin is not visible in the desktop plugin picker yet, restart Codex.
 
-If your Codex version lacks `plugin add`, register the marketplace with the supported CLI, then install **Codemagic** from **Codemagic Community** in the desktop Plugins directory. Update Codex if local marketplaces or portable manifests are unsupported. See [OpenAI's desktop plugin guidance](https://developers.openai.com/plugins/deploy/desktop-only).
+If your Codex version lacks `plugin add`, register the marketplace with the supported CLI, then install **codemagic-mcp (unofficial)** from **codemagic-mcp community** in the desktop Plugins directory. Update Codex if local marketplaces or portable manifests are unsupported. See [OpenAI's desktop plugin guidance](https://developers.openai.com/plugins/deploy/desktop-only).
 
 The plugin's `mcp.json` launches `dist/server.mjs` with `node`, so Node must be discoverable by the Codex process.
 
@@ -117,7 +121,7 @@ The server starts in read-only mode with the core toolset. `cm_list_apps` can be
 Paste the following into Claude Code, Codex, Cursor, or any other coding agent, after replacing the path on the first line. The agent will register the server for you but must never ask for or handle your token; you enter that yourself in a terminal.
 
 ````text
-Set up the community Codemagic MCP server located at: /ABSOLUTE/PATH/TO/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, located at: /ABSOLUTE/PATH/TO/codemagic-mcp
 
 This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server.
 
@@ -125,7 +129,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
 
 2. Find the server entry point inside that path. Prefer `dist/server.mjs` if it exists (dependencies are bundled). Otherwise use `src/cli.js` after running `npm ci --ignore-scripts` in that folder. For an extracted release ZIP the file is `plugins/codemagic/dist/server.mjs`. Call the absolute path SERVER.
 
-3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done.
+3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done. Until then the server runs in setup mode and exposes only `cm_setup_status`.
 
 4. Register the server in the MCP client you are running in, using the `node` command with SERVER as the single argument and the server name `codemagic`:
    - Claude Code: `claude mcp add --scope user codemagic -- node SERVER`
@@ -133,7 +137,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
    - Cursor, Claude Desktop, Windsurf, or others: add `"codemagic": { "command": "node", "args": ["SERVER"] }` under `mcpServers` in the client's MCP config file. Ask me which client if you cannot tell.
    Do not put any token or environment secret into the config. Do not change or remove other MCP entries.
 
-5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server with tools such as `cm_list_teams` appears. If a restart is required, tell me.
+5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
 6. Report what you did, the exact config you added, and which of these follow-ups I can choose: the server is read-only by default; `node SERVER configure --mode builds` enables build start/cancel, and `--toolset all` exposes the full API. Do not run those for me.
 ````
@@ -150,10 +154,12 @@ Press Enter at the token prompt to keep your saved token. Use `--toolset all` fo
 
 These settings persist across plugin upgrades and removal, and across any client. To update, extract the newer release and point your client or marketplace at it; rerun `configure` only if you want to change settings. To remove credentials completely, delete `credentials.env` yourself and revoke the token in Codemagic if appropriate.
 
-## Sharing with others
+## Updates and help
 
-Share the release ZIP. Each person extracts it, saves their own token with `configure`, and connects their client. The ZIP contains no tokens, company IDs or local paths. It is not published to npm or to any public plugin directory.
+New versions are published as [GitHub Releases](https://github.com/alikayhan/codemagic-mcp/releases) with the changelog section as release notes. To update a checkout, `git pull` and run `npm ci --ignore-scripts` again. To update a ZIP install, extract the new release and point your client or marketplace at it. Saved credentials and settings survive both.
 
 Supported operations and limitations are described in the bundled README and `docs/coverage.md`. Read-only apps, team apps and build history have been verified against a live account; most administrative operations are tested with fixtures rather than live mutations.
+
+Questions and bugs go to the [issue tracker](https://github.com/alikayhan/codemagic-mcp/issues). Security problems should be reported privately; see [SECURITY.md](https://github.com/alikayhan/codemagic-mcp/blob/main/SECURITY.md). Never include your API token in an issue, log, or screenshot.
 
 This project is not affiliated with Codemagic or Nevercode Ltd, and Codemagic does not support it.

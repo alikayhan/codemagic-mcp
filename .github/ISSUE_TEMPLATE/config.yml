@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/alikayhan/codemagic-mcp/security/advisories/new
+    about: Report privately. Do not open a public issue for security problems.
+  - name: Codemagic product or API questions
+    url: https://docs.codemagic.io/
+    about: This project is unofficial. Questions about Codemagic itself belong with Codemagic.
