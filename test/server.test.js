@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/client';
 import { InMemoryTransport } from '@modelcontextprotocol/server';
 import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
-import { createServer } from '../src/server.js';
+import { createServer, configureCommandFor } from '../src/server.js';
 import { readConfig } from '../src/config.js';
 import { availableOperations, operations, validateInput } from '../src/catalog.js';
 import { CodemagicClient, requestUrl, redact } from '../src/client.js';
@@ -280,6 +280,14 @@ test('without a token the server runs in setup mode with a single status tool', 
   assert.deepEqual(info.tools, []);
   assert.equal(info.setup.configured, false);
   await assert.rejects(client.callTool({ name: 'cm_get_user', arguments: {} }));
+});
+
+test('setup mode suggests the npm form of configure when running from an npm install', () => {
+  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/codemagic-mcp/src/cli.js'), 'npx -y codemagic-mcp configure');
+  assert.equal(configureCommandFor('C:\\Users\\me\\AppData\\Roaming\\npm\\node_modules\\codemagic-mcp\\src\\cli.js'), 'npx -y codemagic-mcp configure');
+  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/.bin/codemagic-mcp'), 'npx -y codemagic-mcp configure');
+  assert.equal(configureCommandFor('/opt/codemagic-mcp/src/cli.js'), 'node /opt/codemagic-mcp/src/cli.js configure');
+  assert.equal(configureCommandFor(undefined), 'node <path to server> configure');
 });
 
 test('real stdio process without a token initializes in setup mode and points to configure', async t => {
