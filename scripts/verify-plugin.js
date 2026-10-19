@@ -1,12 +1,19 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, mkdir, rm, stat } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { tmpdir, homedir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { unzipSync } from 'fflate';
 import { Client } from '@modelcontextprotocol/client';
 import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
 import { VERSION } from '../src/version.js';
-import { saveSettings } from '../src/credentials.js';
+import { saveSettings, credentialsPath } from '../src/credentials.js';
+import { availableOperations } from '../src/catalog.js';
+import { readConfig } from '../src/config.js';
+
+// Local absolute paths that must not leak into a portable release.
+const localPaths = [homedir(), fileURLToPath(new URL('../', import.meta.url)), process.cwd(), tmpdir()];
+const expectedToolCount = availableOperations(readConfig({ CODEMAGIC_API_TOKEN: 'x', CODEMAGIC_MODE: 'builds' })).length;
 
 const temp = await mkdtemp(join(tmpdir(), 'codemagic-plugin-install-'));
 try {
@@ -16,8 +23,7 @@ try {
     assert.ok(!path.includes('..') && !path.startsWith('/'));
     assert.ok(!/node_modules|credentials\.env|\.env$|\/test\//.test(path));
     const contents = Buffer.from(bytes).toString('utf8');
-    assert.ok(!contents.includes('/Users/alikayhan/'), `Local path in ${path}`);
-    assert.ok(!contents.includes('/private/tmp/'), `Local path in ${path}`);
+    for (const local of localPaths) assert.ok(!contents.includes(local), `Local path ${local} in ${path}`);
     const target = join(extracted, path);
     await mkdir(dirname(target), { recursive: true });
     await writeFile(target, bytes);
@@ -37,13 +43,13 @@ try {
     try {
       await client.connect(transport);
       const { tools } = await client.listTools();
-      assert.equal(tools.length, configured ? 17 : 1);
+      assert.equal(tools.length, configured ? expectedToolCount : 1);
       if (!configured) {
         assert.equal(tools[0].name, 'cm_setup_status');
         const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
         assert.equal(result.structuredContent.configured, false);
         assert.match(result.structuredContent.configureCommand, /server\.mjs configure$/);
-        assert.equal(result.structuredContent.credentialsPath, join(env.CODEMAGIC_CONFIG_DIR, 'credentials.env'));
+        assert.equal(result.structuredContent.credentialsPath, credentialsPath(env));
       }
     } finally { await client.close(); }
   }

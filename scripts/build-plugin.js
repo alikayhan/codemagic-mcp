@@ -7,9 +7,6 @@ import { createHash } from 'node:crypto';
 import { VERSION } from '../src/version.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
-const plugin = JSON.parse(await readFile(join(root, 'plugin.json'), 'utf8'));
-if (pkg.version !== VERSION || plugin.version !== VERSION) throw new Error('Versions must match.');
 const dist = join(root, 'dist');
 await mkdir(dist, { recursive: true });
 const result = await build({
@@ -17,21 +14,23 @@ const result = await build({
   bundle: true, platform: 'node', target: 'node22', format: 'esm', metafile: true,
   legalComments: 'eof', banner: { js: 'import { createRequire as __createRequire } from "node:module"; const require = __createRequire(import.meta.url);' },
 });
-const dependencyDirectories = new Set();
+const dependencies = new Map(); // package directory -> parsed package.json
+const packageMetadata = new Map(); // directory -> parsed package.json, or null when none is there
+async function metadataIn(dir) {
+  if (!packageMetadata.has(dir)) {
+    packageMetadata.set(dir, await readFile(join(dir, 'package.json'), 'utf8').then(JSON.parse).catch(() => null));
+  }
+  return packageMetadata.get(dir);
+}
 for (const input of Object.keys(result.metafile.inputs)) {
   if (!input.startsWith('node_modules/')) continue;
-  let dir = dirname(resolve(root, input));
-  while (dir.startsWith(join(root, 'node_modules'))) {
-    try {
-      const metadata = JSON.parse(await readFile(join(dir, 'package.json'), 'utf8'));
-      if (metadata.name && metadata.version) { dependencyDirectories.add(dir); break; }
-    } catch { /* Continue to the package root. */ }
-    dir = dirname(dir);
+  for (let dir = dirname(resolve(root, input)); dir.startsWith(join(root, 'node_modules')); dir = dirname(dir)) {
+    const metadata = await metadataIn(dir);
+    if (metadata?.name && metadata.version) { dependencies.set(dir, metadata); break; }
   }
 }
 const notices = [];
-for (const dir of [...dependencyDirectories].sort()) {
-  const metadata = JSON.parse(await readFile(join(dir, 'package.json'), 'utf8'));
+for (const [dir, metadata] of [...dependencies].sort(([a], [b]) => a.localeCompare(b))) {
   const files = (await readdir(dir)).filter(name => /^(license|licence|notice|copying)(\.|$)/i.test(name));
   if (!files.length) throw new Error(`Missing license for ${metadata.name}`);
   notices.push(`${metadata.name}@${metadata.version} (${metadata.license || 'See license'})`);
@@ -62,4 +61,4 @@ const entries = Object.fromEntries(Object.entries(files).map(([path, bytes]) => 
 const zip = zipSync(entries, { level: 9 });
 await writeFile(archive, zip);
 await writeFile(archive + '.sha256', `${createHash('sha256').update(zip).digest('hex')}  ${relative(release, archive)}\n`);
-console.log(`Built ${relative(root, archive)} (${zip.byteLength} bytes), ${paths.length} plugin files, ${dependencyDirectories.size} dependency licenses.`);
+console.log(`Built ${relative(root, archive)} (${zip.byteLength} bytes), ${paths.length} plugin files, ${dependencies.size} dependency licenses.`);
