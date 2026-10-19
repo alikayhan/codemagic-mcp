@@ -1,0 +1,11 @@
+This is an independent community integration, not an official Codemagic product.
+Codemagic is a registered trademark of Nevercode Ltd.
+
+schema/operations.json contains an API compatibility contract derived from
+https://codemagic.io/api/v3/schema/openapi.json, with provenance recorded in
+that file. Endpoint names, field definitions and brief descriptions originate
+from Codemagic's published API. Codemagic's upstream materials remain subject
+to their own terms; the MIT license covers this project's implementation.
+
+The Model Context Protocol SDK is provided under Apache-2.0 by its upstream
+contributors. Dependency licenses are included with their installed packages.

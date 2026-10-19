@@ -1,0 +1,39 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Tag must match package.json version
+        run: |
+          PKG="v$(node -p "require('./package.json').version")"
+          test "$PKG" = "${GITHUB_REF_NAME}" || { echo "Tag ${GITHUB_REF_NAME} != ${PKG}"; exit 1; }
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:plugin
+      - run: npm pack --ignore-scripts
+      - name: Extract changelog section
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          awk -v v="$VERSION" '/^## \[/{p=($0 ~ "\\["v"\\]")} p' CHANGELOG.md > RELEASE_NOTES.md
+          test -s RELEASE_NOTES.md || { echo "No CHANGELOG section for $VERSION"; exit 1; }
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: RELEASE_NOTES.md
+          files: |
+            release/codemagic-plugin-*.zip
+            release/codemagic-plugin-*.zip.sha256
+            codemagic-mcp-*.tgz

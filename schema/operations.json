@@ -1,0 +1,5000 @@
+{
+  "source": {
+    "url": "https://codemagic.io/api/v3/schema/openapi.json",
+    "retrievedOn": "2026-10-19",
+    "sha256": "2d4a16fad7a05103c7d8b561cb853543f8a39cc653e6cce31743c69b48c15241",
+    "apiVersion": "v3.0"
+  },
+  "excluded": [
+    {
+      "method": "GET",
+      "path": "/api/v3/user/api-key",
+      "reason": "Do not expose or revoke the server authentication token."
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v3/user/api-key",
+      "reason": "Do not expose or revoke the server authentication token."
+    }
+  ],
+  "operations": [
+    {
+      "name": "cm_delete_ota_access_keys_by_key_id",
+      "method": "DELETE",
+      "path": "/api/v3/ota/{team_id}/access-keys/{key_id}",
+      "origin": "https://codemagic.io",
+      "description": "Delete an access key for a team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "key_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "key_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_previews_by_preview_id",
+      "method": "DELETE",
+      "path": "/api/v3/previews/{preview_id}",
+      "origin": "https://codemagic.io",
+      "description": "Stop an app preview",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "preview_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "preview_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_teams_audit_log_connector",
+      "method": "DELETE",
+      "path": "/api/v3/teams/{team_id}/audit-log-connector",
+      "origin": "https://codemagic.io",
+      "description": "Delete Audit Log Connector settings for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_teams_external_recipients_by_recipient_id",
+      "method": "DELETE",
+      "path": "/api/v3/teams/{team_id}/external-recipients/{recipient_id}",
+      "origin": "https://codemagic.io",
+      "description": "Remove an external build notification recipient",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "recipient_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "recipient_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_teams_invitations_by_invitation_id",
+      "method": "DELETE",
+      "path": "/api/v3/teams/{team_id}/invitations/{invitation_id}",
+      "origin": "https://codemagic.io",
+      "description": "Revoke a team invitation",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "invitation_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "invitation_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_teams_memberships_by_user_id",
+      "method": "DELETE",
+      "path": "/api/v3/teams/{team_id}/memberships/{user_id}",
+      "origin": "https://codemagic.io",
+      "description": "Remove team membership for a user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "user_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_teams_subscriptions_by_subscription_id",
+      "method": "DELETE",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}",
+      "origin": "https://codemagic.io",
+      "description": "Cancel team subscription",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_tester_groups_by_tester_group_id",
+      "method": "DELETE",
+      "path": "/api/v3/tester-groups/{tester_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Delete tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_tester_groups_contacts_by_contact_id",
+      "method": "DELETE",
+      "path": "/api/v3/tester-groups/{tester_group_id}/contacts/{contact_id}",
+      "origin": "https://codemagic.io",
+      "description": "Delete contact from the tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contact_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id",
+              "contact_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_user_memberships_by_team_id",
+      "method": "DELETE",
+      "path": "/api/v3/user/memberships/{team_id}",
+      "origin": "https://codemagic.io",
+      "description": "Remove authenticated user from the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_variable_groups_by_variable_group_id",
+      "method": "DELETE",
+      "path": "/api/v3/variable-groups/{variable_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Delete the group and all variables",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_delete_variable_groups_variables_by_variable_id",
+      "method": "DELETE",
+      "path": "/api/v3/variable-groups/{variable_group_id}/variables/{variable_id}",
+      "origin": "https://codemagic.io",
+      "description": "Delete the variable",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "variable_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id",
+              "variable_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_apps_tester_groups",
+      "method": "GET",
+      "path": "/api/v3/apps/{app_id}/tester-groups",
+      "origin": "https://codemagic.io",
+      "description": "List tester groups for the app",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_apps_variable_groups",
+      "method": "GET",
+      "path": "/api/v3/apps/{app_id}/variable-groups",
+      "origin": "https://codemagic.io",
+      "description": "List variable groups for the app",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_build",
+      "method": "GET",
+      "path": "/api/v3/builds/{build_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get build info",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "build_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "build_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_build_actions",
+      "method": "GET",
+      "path": "/api/v3/builds/{build_id}/actions",
+      "origin": "https://codemagic.io",
+      "description": "Get build actions",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "build_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "build_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_build_remote_access",
+      "method": "GET",
+      "path": "/api/v3/builds/{build_id}/remote-access",
+      "origin": "https://codemagic.io",
+      "description": "Get build remote access info",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "build_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "build_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_dashboards_builds",
+      "method": "GET",
+      "path": "/api/v3/dashboards/{uuid}/builds",
+      "origin": "https://codemagic.io",
+      "description": "List dashboard builds",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_dashboards_by_uuid",
+      "method": "GET",
+      "path": "/api/v3/dashboards/{uuid}",
+      "origin": "https://codemagic.io",
+      "description": "Get a dashboard",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_invitations_public_by_code",
+      "method": "GET",
+      "path": "/api/v3/invitations/public/{code}",
+      "origin": "https://codemagic.io",
+      "description": "Get team invitation by code",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "code"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_meta",
+      "method": "GET",
+      "path": "/api/v3/meta",
+      "origin": "https://codemagic.io",
+      "description": "Get meta information",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_meta_shorebird",
+      "method": "GET",
+      "path": "/api/v3/meta/shorebird",
+      "origin": "https://codemagic.io",
+      "description": "Get information about Shorebird integration",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota",
+      "method": "GET",
+      "path": "/api/v3/ota",
+      "origin": "https://codemagic.io",
+      "description": "Get account information for the authenticated user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_access_keys",
+      "method": "GET",
+      "path": "/api/v3/ota/{team_id}/access-keys",
+      "origin": "https://codemagic.io",
+      "description": "List all access keys for a team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_deployments_releases",
+      "method": "GET",
+      "path": "/api/v3/ota/deployments/{deployment_id}/releases",
+      "origin": "https://codemagic.io",
+      "description": "Get deployment releases history",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "deployment_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "deployment_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_deployments_usage_by_metric",
+      "method": "GET",
+      "path": "/api/v3/ota/deployments/{deployment_id}/usage/{metric}",
+      "origin": "https://codemagic.io",
+      "description": "Get usage stats for a deployment channel.",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "deployment_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "metric": {
+                "type": "string",
+                "enum": [
+                  "download_count",
+                  "deployment_succeeded_count",
+                  "deployment_failed_count"
+                ],
+                "description": "The name of the usage metric to retrieve.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "deployment_id",
+              "metric"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; the default is set to the first day of the current month."
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; default is set to now."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_projects",
+      "method": "GET",
+      "path": "/api/v3/ota/{team_id}/projects",
+      "origin": "https://codemagic.io",
+      "description": "List projects for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_projects_deployment_keys",
+      "method": "GET",
+      "path": "/api/v3/ota/projects/{project_id}/deployment-keys",
+      "origin": "https://codemagic.io",
+      "description": "Get project deployment keys",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "project_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "project_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_ota_usage",
+      "method": "GET",
+      "path": "/api/v3/ota/{team_id}/usage",
+      "origin": "https://codemagic.io",
+      "description": "Get usage stats for the team.",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; the default is set to the first day of the current month."
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; default is set to now."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates",
+      "origin": "https://codemagic.io",
+      "description": "Get account information for the authenticated user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates_deployments_releases",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates/deployments/{deployment_id}/releases",
+      "origin": "https://codemagic.io",
+      "description": "Get deployment releases history",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "deployment_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "deployment_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates_deployments_usage_by_metric",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates/deployments/{deployment_id}/usage/{metric}",
+      "origin": "https://codemagic.io",
+      "description": "Get usage stats for a deployment channel.",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "deployment_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "metric": {
+                "type": "string",
+                "enum": [
+                  "download_count",
+                  "deployment_succeeded_count",
+                  "deployment_failed_count"
+                ],
+                "description": "The name of the usage metric to retrieve.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "deployment_id",
+              "metric"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; the default is set to the first day of the current month."
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; default is set to now."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates_projects",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates/{team_id}/projects",
+      "origin": "https://codemagic.io",
+      "description": "List projects for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates_projects_deployment_keys",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates/projects/{project_id}/deployment-keys",
+      "origin": "https://codemagic.io",
+      "description": "Get project deployment keys",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "project_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "project_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_over_the_air_updates_usage",
+      "method": "GET",
+      "path": "/api/v3/over-the-air-updates/{team_id}/usage",
+      "origin": "https://codemagic.io",
+      "description": "Get usage stats for the team.",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; the default is set to the first day of the current month."
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Datetime in ISO format; default is set to now."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_previews_by_preview_id",
+      "method": "GET",
+      "path": "/api/v3/previews/{preview_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get app preview information",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "preview_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "preview_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_shared_dashboards_builds",
+      "method": "GET",
+      "path": "/api/v3/shared-dashboards/{uuid}/builds",
+      "origin": "https://codemagic.io",
+      "description": "List dashboard builds",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_shared_dashboards_by_uuid",
+      "method": "GET",
+      "path": "/api/v3/shared-dashboards/{uuid}",
+      "origin": "https://codemagic.io",
+      "description": "Get a dashboard",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_shared_previews_by_shared_preview_id",
+      "method": "GET",
+      "path": "/api/v3/shared-previews/{shared_preview_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get shared app preview information",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "shared_preview_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "shared_preview_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_team",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get team info",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_build_duration_percentiles",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/build-duration-percentiles",
+      "origin": "https://codemagic.io",
+      "description": "Get team build duration percentiles",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "app_id": {
+                "anyOf": [
+                  {},
+                  {
+                    "type": "null"
+                  }
+                ],
+                "type": "string"
+              },
+              "workflow_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "percentile": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Percentiles to compute; the default is 25, 50 and 75."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_builds",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/builds",
+      "origin": "https://codemagic.io",
+      "description": "Get team build analytics",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_builds_by_status",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/builds-by-status",
+      "origin": "https://codemagic.io",
+      "description": "Get team builds by status",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "app_id": {
+                "anyOf": [
+                  {},
+                  {
+                    "type": "null"
+                  }
+                ],
+                "type": "string"
+              },
+              "workflow_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_builds_by_status_over_time",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/builds-by-status-over-time",
+      "origin": "https://codemagic.io",
+      "description": "Get team builds by status over time",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "app_id": {
+                "anyOf": [
+                  {},
+                  {
+                    "type": "null"
+                  }
+                ],
+                "type": "string"
+              },
+              "workflow_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_queued_time_percentiles",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/queued-time-percentiles",
+      "origin": "https://codemagic.io",
+      "description": "Get team queued time percentiles",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "app_id": {
+                "anyOf": [
+                  {},
+                  {
+                    "type": "null"
+                  }
+                ],
+                "type": "string"
+              },
+              "workflow_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "percentile": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Percentiles to compute; the default is 25, 50 and 75."
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_analytics_summary",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/analytics/summary",
+      "origin": "https://codemagic.io",
+      "description": "Get team build usage summary",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period_from": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to 30 days ago."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "period_to": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Datetime in ISO format; default is set to now."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period_from",
+              "period_to"
+            ],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query",
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_audit_log",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/audit-log",
+      "origin": "https://codemagic.io",
+      "description": "Download team audit log as CSV",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_audit_log_connector",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/audit-log-connector",
+      "origin": "https://codemagic.io",
+      "description": "Get Audit Log Connector settings for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_cards",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/cards",
+      "origin": "https://codemagic.io",
+      "description": "List team cards",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_customer",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/customer",
+      "origin": "https://codemagic.io",
+      "description": "Get team customer",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_external_recipients",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/external-recipients",
+      "origin": "https://codemagic.io",
+      "description": "List external build notification recipients",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_invitations",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/invitations",
+      "origin": "https://codemagic.io",
+      "description": "List pending team invitations",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_invoices",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/invoices",
+      "origin": "https://codemagic.io",
+      "description": "List team invoices",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_members",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/members",
+      "origin": "https://codemagic.io",
+      "description": "List team members",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              },
+              "id": {
+                "anyOf": [
+                  {
+                    "items": {},
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "User IDs to filter by."
+              },
+              "role": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "owner",
+                      "admin",
+                      "member",
+                      "app_scoped"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Filter members by role. `admin` also includes owners. `app_scoped` selects members with app grants only."
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_previews",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/previews",
+      "origin": "https://codemagic.io",
+      "description": "List app previews for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_subscriptions",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/subscriptions",
+      "origin": "https://codemagic.io",
+      "description": "List team subscriptions",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_subscriptions_by_subscription_id",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get subscription details",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_subscriptions_invoice_preview",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}/invoice-preview",
+      "origin": "https://codemagic.io",
+      "description": "Get subscription invoice preview",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_subscriptions_invoices",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}/invoices",
+      "origin": "https://codemagic.io",
+      "description": "List subscription invoices",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_teams_variable_groups",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/variable-groups",
+      "origin": "https://codemagic.io",
+      "description": "List variable groups for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_tester_groups_by_tester_group_id",
+      "method": "GET",
+      "path": "/api/v3/tester-groups/{tester_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get a tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_tester_groups_contacts",
+      "method": "GET",
+      "path": "/api/v3/tester-groups/{tester_group_id}/contacts",
+      "origin": "https://codemagic.io",
+      "description": "List contacts for the tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_user",
+      "method": "GET",
+      "path": "/api/v3/user",
+      "origin": "https://codemagic.io",
+      "description": "Get authenticated user info",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_user_notifications",
+      "method": "GET",
+      "path": "/api/v3/user/notifications",
+      "origin": "https://codemagic.io",
+      "description": "Get notifications for the authenticated user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_user_preferences",
+      "method": "GET",
+      "path": "/api/v3/user/preferences",
+      "origin": "https://codemagic.io",
+      "description": "Get preferences for the authenticated user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_user_teams_permissions",
+      "method": "GET",
+      "path": "/api/v3/user/teams/{team_id}/permissions",
+      "origin": "https://codemagic.io",
+      "description": "Get the authenticated user's permissions in a team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_variable_groups_by_variable_group_id",
+      "method": "GET",
+      "path": "/api/v3/variable-groups/{variable_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get group information",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_variable_groups_variables",
+      "method": "GET",
+      "path": "/api/v3/variable-groups/{variable_group_id}/variables",
+      "origin": "https://codemagic.io",
+      "description": "List variables for the group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              },
+              "search": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Search query to filter variables."
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_get_variable_groups_variables_by_variable_id",
+      "method": "GET",
+      "path": "/api/v3/variable-groups/{variable_group_id}/variables/{variable_id}",
+      "origin": "https://codemagic.io",
+      "description": "Get a variable from the group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "variable_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id",
+              "variable_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_list_apps",
+      "method": "GET",
+      "path": "/api/v3/user/apps",
+      "origin": "https://codemagic.io",
+      "description": "List apps for the authenticated user",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              },
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Filter apps by name. The query is split on whitespace and every token must appear (case-insensitively) in the app name."
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_list_builds",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/builds",
+      "origin": "https://codemagic.io",
+      "description": "List team builds",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "anyOf": [
+                  {},
+                  {
+                    "type": "null"
+                  }
+                ],
+                "type": "string"
+              },
+              "status": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "queued",
+                      "building",
+                      "finished",
+                      "failed",
+                      "canceled",
+                      "timeout",
+                      "skipped"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "workflow_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "branch": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tag": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "label": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Cursor from the previous response."
+              },
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_list_team_apps",
+      "method": "GET",
+      "path": "/api/v3/teams/{team_id}/apps",
+      "origin": "https://codemagic.io",
+      "description": "List apps for the team",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              },
+              "id": {
+                "anyOf": [
+                  {
+                    "items": {},
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "App IDs to filter by."
+              },
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Filter apps by name. The query is split on whitespace and every token must appear (case-insensitively) in the app name."
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_list_teams",
+      "method": "GET",
+      "path": "/api/v3/user/teams",
+      "origin": "https://codemagic.io",
+      "description": "List teams for the authenticated user",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "page_size": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1,
+                "description": "The maximum number of results per page.",
+                "default": 30
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The page number of the results to fetch.",
+                "default": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_list_workflows",
+      "method": "GET",
+      "path": "/api/v3/apps/{app_id}/workflows",
+      "origin": "https://codemagic.io",
+      "description": "List app workflows",
+      "core": true,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_patch_dashboards_by_dashboard_id",
+      "method": "PATCH",
+      "path": "/api/v3/dashboards/{dashboard_id}",
+      "origin": "https://codemagic.io",
+      "description": "Rename a dashboard",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "dashboard_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "dashboard_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^.*\\S.*$"
+              }
+            },
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_patch_subscriptions_features",
+      "method": "PATCH",
+      "path": "/api/v3/subscriptions/{team_id}/features",
+      "origin": "https://codemagic.io",
+      "description": "Update subscription features for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "app_preview": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "type": "object",
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_patch_tester_groups_by_tester_group_id",
+      "method": "PATCH",
+      "path": "/api/v3/tester-groups/{tester_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Update a tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_patch_variable_groups_by_variable_group_id",
+      "method": "PATCH",
+      "path": "/api/v3/variable-groups/{variable_group_id}",
+      "origin": "https://codemagic.io",
+      "description": "Change group name and settings",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "pattern": "^[^.$]*$"
+              },
+              "advanced_security": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "selected_apps": {
+                        "items": {},
+                        "type": "array",
+                        "maxItems": 30,
+                        "uniqueItems": true,
+                        "description": "IDs of applications that can access the group's variables. Empty if advanced security is disabled"
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "enabled",
+                      "selected_apps"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Only for team's variable groups"
+              }
+            },
+            "type": "object",
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_patch_variable_groups_variables_by_variable_id",
+      "method": "PATCH",
+      "path": "/api/v3/variable-groups/{variable_group_id}/variables/{variable_id}",
+      "origin": "https://codemagic.io",
+      "description": "Update the variable",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "variable_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id",
+              "variable_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "secure": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "type": "object",
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_apps_tester_groups",
+      "method": "POST",
+      "path": "/api/v3/apps/{app_id}/tester-groups",
+      "origin": "https://codemagic.io",
+      "description": "Create tester group for the app",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_apps_variable_groups",
+      "method": "POST",
+      "path": "/api/v3/apps/{app_id}/variable-groups",
+      "origin": "https://codemagic.io",
+      "description": "Create a variable group for the app",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[^.$]*$"
+              }
+            },
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_builds_preview",
+      "method": "POST",
+      "path": "/api/v3/builds/{build_id}/preview",
+      "origin": "https://codemagic.io",
+      "description": "Start an app preview",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "build_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "build_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "artifact_path": {
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "required": [
+              "artifact_path"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_invitations_accept",
+      "method": "POST",
+      "path": "/api/v3/invitations/{code}/accept",
+      "origin": "https://codemagic.io",
+      "description": "Accept a team invitation",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "code"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_ota_access_keys",
+      "method": "POST",
+      "path": "/api/v3/ota/{team_id}/access-keys",
+      "origin": "https://codemagic.io",
+      "description": "Create an access key for a team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              "ttl_days": {
+                "type": "integer",
+                "maximum": 365,
+                "minimum": 1,
+                "default": 365
+              }
+            },
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_previews_share",
+      "method": "POST",
+      "path": "/api/v3/previews/{preview_id}/share",
+      "origin": "https://codemagic.io",
+      "description": "Share an app preview",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "preview_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "preview_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_external_recipients",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/external-recipients",
+      "origin": "https://codemagic.io",
+      "description": "Register external build notification recipients",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "emails": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object",
+            "required": [
+              "emails"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_invitations",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/invitations",
+      "origin": "https://codemagic.io",
+      "description": "Create a team invitation",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "roles": {
+                "items": {
+                  "properties": {
+                    "role": {
+                      "type": "string",
+                      "enum": [
+                        "admin",
+                        "member"
+                      ]
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "role"
+                  ],
+                  "additionalProperties": false
+                },
+                "type": "array",
+                "maxItems": 1,
+                "minItems": 1
+              }
+            },
+            "type": "object",
+            "required": [
+              "email",
+              "roles"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_invoice_preview",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/invoice-preview",
+      "origin": "https://codemagic.io",
+      "description": "Generate invoice preview for chosen line items",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "line_items": {
+                "items": {
+                  "properties": {
+                    "product_id": {},
+                    "quantity": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "product_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "type": "array"
+              },
+              "promotion_code": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "type": "object",
+            "required": [
+              "line_items"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_subscriptions",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/subscriptions",
+      "origin": "https://codemagic.io",
+      "description": "Create team subscription",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": [
+                  "cicd",
+                  "codepush"
+                ]
+              },
+              "pricing_model": {
+                "type": "string",
+                "enum": [
+                  "flat_rate",
+                  "usage_based"
+                ]
+              },
+              "interval": {
+                "type": "string",
+                "enum": [
+                  "monthly",
+                  "annual"
+                ]
+              },
+              "items": {
+                "items": {
+                  "properties": {
+                    "product_slug": {
+                      "type": "string",
+                      "enum": [
+                        "cicd",
+                        "codepush"
+                      ]
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "product_slug"
+                  ],
+                  "additionalProperties": false
+                },
+                "type": "array",
+                "minItems": 1
+              },
+              "card": {
+                "properties": {
+                  "provider_id": {
+                    "type": "string"
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "provider_id"
+                ],
+                "additionalProperties": false
+              },
+              "idempotency_key": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9-]+$",
+                "description": "Client key for this payment attempt. Reuse the same key on timeout and 5xx. Mint a new key on 400 and 422 client errors: card or promotion-code decline. On 409, re-read the team's subscriptions before retrying: an earlier attempt with this key may already have created one."
+              },
+              "code": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "minLength": 1
+              }
+            },
+            "type": "object",
+            "required": [
+              "card",
+              "category",
+              "interval",
+              "items",
+              "pricing_model"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_subscriptions_promotion_code",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}/promotion-code",
+      "origin": "https://codemagic.io",
+      "description": "Apply promotion code to subscription",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "type": "object",
+            "required": [
+              "code"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_teams_variable_groups",
+      "method": "POST",
+      "path": "/api/v3/teams/{team_id}/variable-groups",
+      "origin": "https://codemagic.io",
+      "description": "Create a variable group for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[^.$]*$"
+              },
+              "advanced_security": {
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "selected_apps": {
+                    "items": {},
+                    "type": "array",
+                    "maxItems": 30,
+                    "uniqueItems": true,
+                    "description": "IDs of applications that can access the group's variables. Empty if advanced security is disabled"
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "selected_apps"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "type": "object",
+            "required": [
+              "advanced_security",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_tester_groups_contacts",
+      "method": "POST",
+      "path": "/api/v3/tester-groups/{tester_group_id}/contacts",
+      "origin": "https://codemagic.io",
+      "description": "Bulk import contacts to the tester group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "tester_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "tester_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "emails": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object",
+            "required": [
+              "emails"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_post_variable_groups_variables",
+      "method": "POST",
+      "path": "/api/v3/variable-groups/{variable_group_id}/variables",
+      "origin": "https://codemagic.io",
+      "description": "Bulk import variables to the group",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "variable_group_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "variable_group_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "secure": {
+                "type": "boolean"
+              },
+              "variables": {
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                "type": "array"
+              }
+            },
+            "type": "object",
+            "required": [
+              "secure",
+              "variables"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_put_teams_audit_log_connector",
+      "method": "PUT",
+      "path": "/api/v3/teams/{team_id}/audit-log-connector",
+      "origin": "https://codemagic.io",
+      "description": "Update Audit Log Connector settings for the team",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "aws_bucket_name": {
+                "type": "string",
+                "maxLength": 63,
+                "minLength": 3
+              },
+              "aws_access_key_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 16
+              },
+              "aws_secret_key": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 16
+              }
+            },
+            "type": "object",
+            "required": [
+              "aws_access_key_id",
+              "aws_bucket_name",
+              "aws_secret_key"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_put_teams_customer_default_payment_method",
+      "method": "PUT",
+      "path": "/api/v3/teams/{team_id}/customer/default-payment-method",
+      "origin": "https://codemagic.io",
+      "description": "Set customer default payment method",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "card"
+                ]
+              },
+              "provider_id": {
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "required": [
+              "provider_id",
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_put_teams_memberships_by_user_id",
+      "method": "PUT",
+      "path": "/api/v3/teams/{team_id}/memberships/{user_id}",
+      "origin": "https://codemagic.io",
+      "description": "Update team membership for a user",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "user_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": [
+                  "member",
+                  "admin"
+                ]
+              }
+            },
+            "type": "object",
+            "required": [
+              "role"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_put_teams_subscriptions_default_payment_method",
+      "method": "PUT",
+      "path": "/api/v3/teams/{team_id}/subscriptions/{subscription_id}/default-payment-method",
+      "origin": "https://codemagic.io",
+      "description": "Set subscription default payment method",
+      "core": false,
+      "buildAction": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "subscription_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "team_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "subscription_id",
+              "team_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "card"
+                ]
+              },
+              "provider_id": {
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "required": [
+              "provider_id",
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    },
+    {
+      "name": "cm_start_build",
+      "method": "POST",
+      "path": "/api/v3/apps/{app_id}/builds",
+      "origin": "https://codemagic.io",
+      "description": "Start a new build",
+      "core": true,
+      "buildAction": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "app_id"
+            ],
+            "additionalProperties": false
+          },
+          "body": {
+            "properties": {
+              "workflow_id": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "The workflow to build. A 24-character hexadecimal id selects a Workflow Editor workflow, any other value the id of a workflow in the repository's `codemagic.yaml`."
+              },
+              "branch": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "pattern": "\\S",
+                "description": "The branch to build. Exactly one of `branch` or `tag` is required."
+              },
+              "tag": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "pattern": "\\S",
+                "description": "The tag to build. Exactly one of `branch` or `tag` is required."
+              },
+              "ssh_access_enabled": {
+                "type": "boolean",
+                "description": "Enable remote access to the build machine. Rejected when the team disallows it.",
+                "default": false
+              },
+              "labels": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "items": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "description": "Labels to tag the build with."
+              },
+              "instance_type": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "mac_mini_m2",
+                      "mac_mini_m4",
+                      "mac_studio_m4_max",
+                      "linux_x2",
+                      "linux_x4",
+                      "windows_x2"
+                    ],
+                    "description": "The build machine a build runs on, overriding the instance type the workflow declares."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The build machine to run the build on."
+              },
+              "inputs": {
+                "anyOf": [
+                  {
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "propertyNames": {
+                  "pattern": "^[a-zA-Z]\\w*$"
+                },
+                "description": "Values for the workflow's inputs, keyed by input name."
+              },
+              "environment": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "variables": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "type": "object"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "propertyNames": {
+                          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+                        },
+                        "description": "Environment variables for the build, keyed by variable name."
+                      },
+                      "groups": {
+                        "anyOf": [
+                          {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "items": {
+                          "type": "string",
+                          "pattern": "\\S"
+                        },
+                        "description": "Variable groups to make available to the build."
+                      },
+                      "software_versions": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "type": "object"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "propertyNames": {
+                          "enum": [
+                            "xcode",
+                            "flutter",
+                            "cocoapods",
+                            "node",
+                            "npm",
+                            "ndk",
+                            "ruby",
+                            "ubuntu"
+                          ]
+                        },
+                        "description": "Software versions to install for the build, keyed by software."
+                      }
+                    },
+                    "type": "object",
+                    "required": [],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Environment overrides for the build."
+              }
+            },
+            "type": "object",
+            "required": [
+              "workflow_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "path",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "source": "v3"
+    }
+  ]
+}

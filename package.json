@@ -1,0 +1,62 @@
+{
+  "name": "codemagic-mcp",
+  "version": "0.1.0",
+  "description": "Community MCP server for Codemagic apps, builds, teams and administration",
+  "bin": {
+    "codemagic-mcp": "src/cli.js"
+  },
+  "exports": "./src/server.js",
+  "files": [
+    "src",
+    "schema",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "docs",
+    "dist",
+    "plugin.json",
+    "mcp.json",
+    "INSTALL.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test",
+    "check": "node scripts/check.js",
+    "schema:update": "node scripts/update-schema.js",
+    "prepack": "npm run check && npm test && npm run build && npm run test:plugin",
+    "build": "node scripts/build-plugin.js",
+    "test:plugin": "node scripts/verify-plugin.js",
+    "sync:version": "node scripts/sync-version.js",
+    "version": "npm run sync:version && git add plugin.json"
+  },
+  "keywords": [
+    "codemagic",
+    "mcp",
+    "model-context-protocol",
+    "ci",
+    "builds"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "esbuild": "0.28.2",
+    "fflate": "0.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alikayhan/codemagic-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alikayhan/codemagic-mcp/issues"
+  },
+  "homepage": "https://github.com/alikayhan/codemagic-mcp#readme"
+}
