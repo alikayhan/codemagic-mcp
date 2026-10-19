@@ -31,6 +31,7 @@ test('default MCP session advertises read-only tools, capabilities and no creden
   assert.ok(!JSON.stringify(tools).includes('test-only-token'));
   const resource = await client.readResource({ uri: 'codemagic://capabilities' });
   const info = JSON.parse(resource.contents[0].text);
+  assert.equal(info.configured, true);
   assert.equal(info.mode, 'read-only');
   assert.equal(info.tools.length, 12);
 });
@@ -256,13 +257,34 @@ test('all tools expose schemas and token lifecycle routes are absent', async t =
   for (const tool of tools) assert.equal(tool.inputSchema.type, 'object');
 });
 
-test('real stdio process initializes, lists tools and returns missing-token errors', async t => {
-  const transport = new StdioClientTransport({ command: process.execPath, args: [fileURLToPath(new URL('../src/cli.js', import.meta.url))], env: { CODEMAGIC_MODE: 'read-only', CODEMAGIC_API_TOKEN: '' }, stderr: 'pipe' });
+test('without a token the server runs in setup mode with a single status tool', async t => {
+  const client = await session(t, { token: undefined });
+  const { tools } = await client.listTools();
+  assert.deepEqual(tools.map(tool => tool.name), ['cm_setup_status']);
+  assert.ok(tools[0].annotations.readOnlyHint);
+  const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
+  assert.notEqual(result.isError, true);
+  assert.equal(result.structuredContent.configured, false);
+  assert.match(result.structuredContent.configureCommand, /configure$/);
+  assert.ok(result.structuredContent.steps.some(step => /reconnect/i.test(step)));
+  assert.ok(!JSON.stringify(result).includes('test-only-token'));
+  const resource = await client.readResource({ uri: 'codemagic://capabilities' });
+  const info = JSON.parse(resource.contents[0].text);
+  assert.equal(info.configured, false);
+  assert.deepEqual(info.tools, []);
+  assert.equal(info.setup.configured, false);
+  await assert.rejects(client.callTool({ name: 'cm_get_user', arguments: {} }));
+});
+
+test('real stdio process without a token initializes in setup mode and points to configure', async t => {
+  const transport = new StdioClientTransport({ command: process.execPath, args: [fileURLToPath(new URL('../src/cli.js', import.meta.url))], env: { CODEMAGIC_MODE: 'read-only', CODEMAGIC_API_TOKEN: '', CODEMAGIC_CONFIG_DIR: '/nonexistent/codemagic-mcp-test' }, stderr: 'pipe' });
   const client = new Client({ name: 'stdio-test', version: '1.0.0' });
   t.after(() => client.close());
   await client.connect(transport);
-  assert.equal((await client.listTools()).tools.length, 12);
-  const result = await client.callTool({ name: 'cm_get_user', arguments: {} });
-  assert.equal(result.isError, true);
-  assert.match(result.content[0].text, /CODEMAGIC_API_TOKEN/);
+  assert.match(client.getInstructions(), /setup mode/);
+  const { tools } = await client.listTools();
+  assert.deepEqual(tools.map(tool => tool.name), ['cm_setup_status']);
+  const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
+  assert.match(result.content[0].text, /src\/cli\.js configure/);
+  assert.match(result.content[0].text, /credentials\.env/);
 });

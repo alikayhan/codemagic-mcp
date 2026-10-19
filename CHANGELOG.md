@@ -8,6 +8,14 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 
 ## [Unreleased]
 
+### Added
+
+- Setup mode. When no API token is configured the server starts with a single read-only tool, `cm_setup_status`, that returns the local configure command, the credentials file location, and the steps to finish setup. Server instructions and the `codemagic://capabilities` resource report `configured: false`.
+
+### Changed
+
+- Without a token the API tools are no longer registered, so a half-configured server can no longer look ready. Previously all tools were listed and each call failed with a hint.
+
 ## [0.1.0] - 2026-10-19
 
 Initial release.

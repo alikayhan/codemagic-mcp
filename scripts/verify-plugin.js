@@ -37,13 +37,15 @@ try {
     try {
       await client.connect(transport);
       const { tools } = await client.listTools();
-      assert.equal(tools.length, configured ? 14 : 12);
+      assert.equal(tools.length, configured ? 14 : 1);
       if (!configured) {
-        const result = await client.callTool({ name: 'cm_get_user', arguments: {} });
-        assert.equal(result.isError, true);
-        assert.match(result.content[0].text, /configure/);
+        assert.equal(tools[0].name, 'cm_setup_status');
+        const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
+        assert.equal(result.structuredContent.configured, false);
+        assert.match(result.content[0].text, /server\.mjs configure/);
+        assert.match(result.content[0].text, new RegExp(env.CODEMAGIC_CONFIG_DIR.replaceAll('\\', '\\\\').replaceAll('/', '[/\\\\]')));
       }
     } finally { await client.close(); }
   }
-  console.log('Clean ZIP verified: isolated users, paths with spaces, no node_modules, missing-token guidance, saved-token build mode, MCP handshake and tool discovery.');
+  console.log('Clean ZIP verified: isolated users, paths with spaces, no node_modules, setup mode without a token, saved-token build mode, MCP handshake and tool discovery.');
 } finally { await rm(temp, { recursive: true, force: true }); }
