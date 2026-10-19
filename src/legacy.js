@@ -5,7 +5,7 @@ function operation(name, method, path, description, pathFields = [], body) {
   if (pathFields.length) properties.path = object(Object.fromEntries(pathFields.map(key => [key, string])));
   if (body) properties.body = body;
   return { name, method, path, origin: 'https://api.codemagic.io', description,
-    core: true, buildAction: name === 'cm_cancel_build', inputSchema: object(properties), source: 'legacy' };
+    core: true, buildAction: ['cm_cancel_build', 'cm_delete_caches', 'cm_delete_cache', 'cm_create_artifact_link'].includes(name), inputSchema: object(properties), source: 'legacy' };
 }
 export const legacyOperations = [
   operation('cm_get_app', 'GET', '/apps/{app_id}', 'Get application details using the documented legacy API.', ['app_id']),

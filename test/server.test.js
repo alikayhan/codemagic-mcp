@@ -22,18 +22,29 @@ async function session(t, settings = {}, fetchImpl = async () => json({ data: []
   return client;
 }
 
-test('default MCP session advertises read-only tools, capabilities and no credentials', async t => {
+test('default MCP session advertises core read tools plus build, cache and artifact-link actions', async t => {
   const client = await session(t);
   const { tools } = await client.listTools();
-  assert.equal(tools.length, 12);
-  assert.ok(tools.every(tool => tool.annotations.readOnlyHint));
+  assert.equal(tools.length, 17);
+  const mutating = tools.filter(tool => !tool.annotations.readOnlyHint).map(tool => tool.name).sort();
+  assert.deepEqual(mutating, ['cm_cancel_build', 'cm_create_artifact_link', 'cm_delete_cache', 'cm_delete_caches', 'cm_start_build']);
   assert.ok(tools.find(tool => tool.name === 'cm_get_build'));
+  assert.ok(!tools.find(tool => tool.name === 'cm_add_app'));
   assert.ok(!JSON.stringify(tools).includes('test-only-token'));
   const resource = await client.readResource({ uri: 'codemagic://capabilities' });
   const info = JSON.parse(resource.contents[0].text);
   assert.equal(info.configured, true);
+  assert.equal(info.mode, 'builds');
+  assert.equal(info.tools.length, 17);
+});
+
+test('read-only mode exposes only GET tools', async t => {
+  const client = await session(t, { mode: 'read-only' });
+  const { tools } = await client.listTools();
+  assert.equal(tools.length, 12);
+  assert.ok(tools.every(tool => tool.annotations.readOnlyHint));
+  const info = JSON.parse((await client.readResource({ uri: 'codemagic://capabilities' })).contents[0].text);
   assert.equal(info.mode, 'read-only');
-  assert.equal(info.tools.length, 12);
 });
 
 test('MCP app discovery sends a token only in the auth header and preserves pagination', async t => {
@@ -88,7 +99,7 @@ test('read-only and builds modes cannot invoke hidden mutations', async t => {
   let calls = 0;
   for (const mode of ['read-only', 'builds']) {
     const client = await session(t, { mode, toolset: 'all' }, async () => { calls++; return json({}); });
-    const name = mode === 'read-only' ? 'cm_start_build' : 'cm_delete_caches';
+    const name = mode === 'read-only' ? 'cm_start_build' : 'cm_add_app';
     try {
       const result = await client.callTool({ name, arguments: { path: { app_id: 'app-1' } } });
       assert.equal(result.isError, true);

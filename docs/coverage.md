@@ -111,6 +111,6 @@ The v3 API-token read/revoke routes are excluded. Deprecated OTA aliases are inc
 | cm_add_private_app | POST | /apps/new | core + all | all |
 | cm_cancel_build | POST | /builds/{build_id}/cancel | core + all | builds / all |
 | cm_list_caches | GET | /apps/{app_id}/caches | core + all | any |
-| cm_delete_caches | DELETE | /apps/{app_id}/caches | core + all | all |
-| cm_delete_cache | DELETE | /apps/{app_id}/caches/{cache_id} | core + all | all |
-| cm_create_artifact_link | POST | /artifacts/{artifact_path}/public-url | core + all | all |
+| cm_delete_caches | DELETE | /apps/{app_id}/caches | core + all | builds / all |
+| cm_delete_cache | DELETE | /apps/{app_id}/caches/{cache_id} | core + all | builds / all |
+| cm_create_artifact_link | POST | /artifacts/{artifact_path}/public-url | core + all | builds / all |
