@@ -49,7 +49,7 @@ async function readBounded(response, limit) {
       if (done) break;
       size += value.byteLength;
       if (size > limit) throw new Error('Response exceeded the size limit.');
-      chunks.push(Buffer.from(value));
+      chunks.push(value);
     }
   } finally {
     await reader.cancel().catch(() => {});
