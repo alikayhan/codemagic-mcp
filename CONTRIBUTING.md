@@ -58,7 +58,7 @@ Review the diff carefully. Pay attention to new mutating operations and which to
 - Branch from `main`. Keep each PR focused on one change.
 - Add or update tests. Mutations need a test that proves they are absent in `read-only` mode.
 - Add a line under `## [Unreleased]` in `CHANGELOG.md` using the Keep a Changelog categories (Added, Changed, Fixed, Removed, Security).
-- Run `npm run check`, `npm test`, `npm run build`, and `npm run test:plugin` locally. CI runs the same on Linux, macOS, and Windows.
+- Run `npm run verify` locally (check, test, build, and test:plugin in one go). CI runs the same on Linux, macOS, and Windows.
 - Write the PR title as the commit message you want on `main`. PRs are squash-merged and the title becomes the commit subject; the body is discarded.
 - Do not bump the version in a feature PR. Releases are cut separately; see "Versioning and releases" in the README.
 

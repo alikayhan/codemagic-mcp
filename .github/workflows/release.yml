@@ -20,10 +20,7 @@ jobs:
         run: |
           PKG="v$(node -p "require('./package.json').version")"
           test "$PKG" = "${GITHUB_REF_NAME}" || { echo "Tag ${GITHUB_REF_NAME} != ${PKG}"; exit 1; }
-      - run: npm run check
-      - run: npm test
-      - run: npm run build
-      - run: npm run test:plugin
+      - run: npm run verify
       - run: npm pack --ignore-scripts
       - name: Extract changelog section
         run: |
