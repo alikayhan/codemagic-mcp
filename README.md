@@ -12,54 +12,63 @@ A standard [Model Context Protocol](https://modelcontextprotocol.io) server, ove
 
 The same code is also packaged as a **Codex plugin** for people who prefer installing from a local plugin marketplace. That is an optional packaging on top of the plain MCP server, not a different product.
 
-**Status:** 0.x, pre-1.0. Core read-only operations (apps, teams, build history) have been verified against a live account. Administrative operations are covered by test fixtures rather than live mutations. Not published to npm or to any public plugin directory. See [CHANGELOG.md](CHANGELOG.md).
+**Status:** 0.x, pre-1.0. Core read-only operations (apps, teams, build history) have been verified against a live account. Administrative operations are covered by test fixtures rather than live mutations. Published to npm as `codemagic-mcp`; not listed in any public plugin directory. See [CHANGELOG.md](CHANGELOG.md).
 
 ## Requirements
 
-- Node.js 22 or newer on your PATH.
+- Node.js 22 or newer on your PATH. It ships `npx`, which is all the default install needs.
 - A personal Codemagic API token. Codemagic's docs currently place it under **Teams → Personal Account → Integrations → Codemagic API → Show**. Permissions follow the token owner's team role.
 
 ## Quick start
 
-### 1. Get the server
+The server is published to npm as [`codemagic-mcp`](https://www.npmjs.com/package/codemagic-mcp). Clients launch it with `npx -y codemagic-mcp`, which downloads it on first use and caches it. Nothing needs to be cloned or built.
 
-Clone this repository and install dependencies:
-
-```sh
-git clone https://github.com/alikayhan/codemagic-mcp.git
-cd codemagic-mcp
-npm ci --ignore-scripts
-```
-
-There is no build step for the plain server; `src/cli.js` runs directly. Alternatively, download the release ZIP attached to a [GitHub Release](https://github.com/alikayhan/codemagic-mcp/releases); it contains a bundled single-file server at `plugins/codemagic/dist/server.mjs` and needs no `npm install`. The ZIP is mainly for the Codex plugin path.
-
-Throughout this document, `SERVER` means one of:
-
-| Source | `SERVER` |
-| --- | --- |
-| Repository checkout | `/absolute/path/codemagic-mcp/src/cli.js` |
-| Repository checkout, bundled (`npm run build`) | `/absolute/path/codemagic-mcp/dist/server.mjs` |
-| Extracted release ZIP | `/absolute/path/extracted/plugins/codemagic/dist/server.mjs` |
-
-### 2. Save your token privately
+### 1. Save your token privately
 
 ```sh
-node SERVER configure
+npx -y codemagic-mcp configure
 ```
 
 This prompts for the token without echoing it and writes it to `~/.config/codemagic-mcp/credentials.env` (directory mode 0700, file mode 0600 on macOS/Linux). Do not paste the token into a chat, a command argument, or a client config file. Alternatively, supply `CODEMAGIC_API_TOKEN` through your client's environment configuration; environment values override the saved file. The server never reads a `.env` from the current directory or from a repository.
 
 Without a token the server still starts, but in **setup mode**: it exposes a single tool, `cm_setup_status`, which returns the configure command and the credentials file location, and no API tools. Reconnect the server after running `configure` and the full tool list appears.
 
-### 3. Connect your MCP client
+### 2. Connect your MCP client
 
 **Claude Code**
 
 ```sh
-claude mcp add --scope user codemagic -- node SERVER
+claude mcp add --scope user codemagic -- npx -y codemagic-mcp
 ```
 
 Then run `/mcp` inside Claude Code to confirm it connected. Tools appear as `mcp__codemagic__cm_list_teams` and so on.
+
+**Codex**
+
+```sh
+codex mcp add codemagic -- npx -y codemagic-mcp
+```
+
+This writes an `[mcp_servers.codemagic]` entry to `~/.codex/config.toml`. To set mode or toolset there instead of through `configure`, add an `[mcp_servers.codemagic.env]` table with `CODEMAGIC_MODE` and `CODEMAGIC_TOOLSET`.
+
+**Pi**
+
+```sh
+pi mcp add codemagic -- npx -y codemagic-mcp
+```
+
+**OpenCode** (`opencode.json`)
+
+```json
+{
+  "mcp": {
+    "codemagic": {
+      "type": "local",
+      "command": ["npx", "-y", "codemagic-mcp"]
+    }
+  }
+}
+```
 
 **Any client that accepts `mcpServers` JSON** (Cursor, Claude Desktop, Windsurf, and others)
 
@@ -67,59 +76,60 @@ Then run `/mcp` inside Claude Code to confirm it connected. Tools appear as `mcp
 {
   "mcpServers": {
     "codemagic": {
-      "command": "node",
-      "args": ["SERVER"]
+      "command": "npx",
+      "args": ["-y", "codemagic-mcp"]
     }
   }
 }
 ```
 
-If the client does not inherit your shell environment and you prefer an env file over the saved credentials, add `"--env-file=/absolute/path/codemagic.env"` before `SERVER` in `args`. See `.env.example` for the file format.
+Desktop clients on Windows sometimes cannot launch `npx` directly; use `"command": "cmd"` with `"args": ["/c", "npx", "-y", "codemagic-mcp"]`. If the client does not inherit your shell environment and you prefer an env file over the saved credentials, add `"--env-file=/absolute/path/codemagic.env"` after `codemagic-mcp` in `args`. See `.env.example` for the file format.
 
-**Codex, as a plain MCP server** (user or trusted-project `config.toml`)
+To pin a version, write `codemagic-mcp@0.1.0` instead of `codemagic-mcp`. For faster startup, install once with `npm install -g codemagic-mcp` and use `codemagic-mcp` as the command with no arguments.
 
-```toml
-[mcp_servers.codemagic]
-command = "node"
-args = ["SERVER"]
-
-[mcp_servers.codemagic.env]
-CODEMAGIC_MODE = "builds"     # or "read-only" for inspection only, "all" for administration
-CODEMAGIC_TOOLSET = "core"    # or "all" for the full API
-```
-
-**Codex, as a plugin** from the release ZIP's local marketplace: see [INSTALL.md](INSTALL.md).
-
-### 4. Try it
+### 3. Try it
 
 Ask your agent: *"List my Codemagic teams and their apps, then show the latest builds."*
 
 By default the server can read everything and can start or cancel builds, delete caches and create artifact links. Starting a build can cost money and, depending on the workflow, publish a release. See [Toolsets and permissions](#toolsets-and-permissions) to restrict it to read-only or to enable administrative writes.
 
+## Other ways to run the server
+
+Two alternatives exist for people who do not want npm involved at runtime. In the instructions above, replace `npx -y codemagic-mcp` with `node SERVER`, where `SERVER` is:
+
+| Source | `SERVER` |
+| --- | --- |
+| Repository checkout (`git clone`, then `npm ci --ignore-scripts`; no build step) | `/absolute/path/codemagic-mcp/src/cli.js` |
+| Extracted release ZIP from a [GitHub Release](https://github.com/alikayhan/codemagic-mcp/releases) (single bundled file, no install) | `/absolute/path/extracted/plugins/codemagic/dist/server.mjs` |
+
+The release ZIP also contains a local **Codex plugin marketplace** for people who prefer installing the server as a Codex plugin; see [INSTALL.md](INSTALL.md). Do not combine the plugin with a `codex mcp add` entry in the same client, or the tools appear twice.
+
 ## Setup prompt for a coding agent
 
-Paste the following into Claude Code, Codex, Cursor, or any other coding agent. It makes the agent clone this repository from GitHub, register the server, and verify it, while leaving the token to you: the agent must never ask for or handle it, and you enter it yourself in a terminal. If you already have a checkout or an extracted release ZIP, tell the agent its absolute path and it will skip the clone.
+Paste the following into Claude Code, Codex, Pi, Cursor, or any other coding agent. The agent registers the server and verifies it, but leaves the token to you: it must never ask for or handle it, and you enter it yourself in a terminal.
 
 ````text
-Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, from its GitHub repository: https://github.com/alikayhan/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API. It is published on npm as `codemagic-mcp` and documented at https://github.com/alikayhan/codemagic-mcp
 
-This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server that runs locally with my own Codemagic API token.
+This is an unofficial, community-built MCP server, not an official Codemagic product. It is a standard stdio MCP server that runs locally with my own Codemagic API token. Clients launch it with `npx -y codemagic-mcp`.
 
-1. Confirm Node.js 22 or newer and git are on PATH (`node --version`, `git --version`). If either is missing, stop and tell me how to install it.
+1. Confirm Node.js 22 or newer is on PATH (`node --version`). If not, stop and tell me how to install it.
 
-2. Get the server. If I have not given you a path, clone the repository into a permanent location outside any project, for example `~/.local/share/codemagic-mcp` (ask me if you are unsure), with `git clone https://github.com/alikayhan/codemagic-mcp.git`, then run `npm ci --ignore-scripts` inside it. The entry point is `src/cli.js`; call its absolute path SERVER. If I gave you an existing checkout, use it the same way without cloning again. If I gave you an extracted release ZIP, SERVER is `plugins/codemagic/dist/server.mjs` and no `npm ci` is needed.
+2. Verify the package runs: `npx -y codemagic-mcp --version` must print a version. Do not clone the repository or install anything globally unless I ask.
 
-3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done. Until then the server runs in setup mode and exposes only `cm_setup_status`.
+3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `npx -y codemagic-mcp configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done. Until then the server runs in setup mode and exposes only `cm_setup_status`.
 
-4. Register the server in the MCP client you are running in, using the `node` command with SERVER as the single argument and the server name `codemagic`:
-   - Claude Code: `claude mcp add --scope user codemagic -- node SERVER`
-   - Codex: add an `[mcp_servers.codemagic]` entry with `command = "node"` and `args = ["SERVER"]` to the user `config.toml`.
-   - Cursor, Claude Desktop, Windsurf, or others: add `"codemagic": { "command": "node", "args": ["SERVER"] }` under `mcpServers` in the client's MCP config file. Ask me which client if you cannot tell.
+4. Register the server in the MCP client you are running in, with the server name `codemagic`, the command `npx`, and the arguments `-y codemagic-mcp`:
+   - Claude Code: `claude mcp add --scope user codemagic -- npx -y codemagic-mcp`
+   - Codex: `codex mcp add codemagic -- npx -y codemagic-mcp`
+   - Pi: `pi mcp add codemagic -- npx -y codemagic-mcp`
+   - OpenCode: add `"codemagic": { "type": "local", "command": ["npx", "-y", "codemagic-mcp"] }` under `mcp` in `opencode.json`.
+   - Cursor, Claude Desktop, Windsurf, or others: add `"codemagic": { "command": "npx", "args": ["-y", "codemagic-mcp"] }` under `mcpServers` in the client's MCP config file. Ask me which client if you cannot tell.
    Do not put any token or environment secret into the config. Do not change or remove other MCP entries.
 
-5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
+5. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
-6. Report what you did, where the clone lives, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `node SERVER configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me. To update later, I run `git pull` and `npm ci --ignore-scripts` in the clone.
+6. Report what you did, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `npx -y codemagic-mcp configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me.
 ````
 
 ## Coverage
@@ -153,7 +163,7 @@ The workflow endpoint reports workflows known to Codemagic. If a newly added YAM
 Set these through your client's environment configuration, or persist mode and toolset alongside the token:
 
 ```sh
-node SERVER configure --mode read-only --toolset core
+npx -y codemagic-mcp configure --mode read-only --toolset core
 ```
 
 Press Enter at the token prompt to keep the saved token. Reconnect or restart the client after changing configuration.
@@ -225,7 +235,7 @@ To cut a release:
 2. Run `npm version minor` (or `patch` / `major`). This bumps `package.json`, syncs `plugin.json`, commits, and creates the `vx.y.z` tag.
 3. Run `git push --follow-tags`.
 
-The `Release` GitHub Actions workflow runs on `v*` tags. It checks that the tag matches `package.json`, runs checks and tests, builds the Codex plugin ZIP and the npm tarball, and attaches them to a GitHub Release whose body is that version's changelog section. Build outputs (`dist/`, `release/`, `*.tgz`) are gitignored and never committed.
+The `Release` GitHub Actions workflow runs on `v*` tags. It checks that the tag matches `package.json`, runs checks and tests, builds the Codex plugin ZIP and the npm tarball, attaches them to a GitHub Release whose body is that version's changelog section, and publishes the package to npm with provenance. Publishing uses npm trusted publishing tied to this repository's `release.yml`, so no npm token is stored in GitHub. Build outputs (`dist/`, `release/`, `*.tgz`) are gitignored and never committed.
 
 ## Development
 
@@ -247,7 +257,7 @@ npm run test:plugin
 
 Output: `release/codemagic-plugin-0.1.0.zip`, its SHA-256 file, and an extracted local marketplace. The ZIP contains a single-file `dist/server.mjs` with dependencies bundled, plus `plugin.json` and `mcp.json` in the portable Agent Plugins format. The bundled file is also a convenient target for non-Codex clients.
 
-**npm tarball:** `npm pack` creates `codemagic-mcp-0.1.0.tgz`. Install it with `npm install -g /path/to/codemagic-mcp-0.1.0.tgz` and configure the resulting `codemagic-mcp` executable in a client. The package name is local only; this project is not in any registry.
+**npm tarball:** `npm pack` creates `codemagic-mcp-0.1.0.tgz`, the same artifact the release workflow publishes to npm. Install it with `npm install -g /path/to/codemagic-mcp-0.1.0.tgz` to try the published layout before cutting a release.
 
 **Updating the API contract:** run `npm run schema:update`, or `node scripts/update-schema.js /path/to/openapi.json` with a downloaded specification. Review the generated diff, permissions and names, then run checks and tests. The schema is never refreshed at server startup. The generator resolves local references, uses strict object fields, and normalizes upstream overlapping `oneOf` type unions into `anyOf` (notably integer/number build inputs). Build branch/tag exclusivity is validated separately.
 
