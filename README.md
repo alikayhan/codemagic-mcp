@@ -98,16 +98,16 @@ By default the server can read everything and can start or cancel builds, delete
 
 ## Setup prompt for a coding agent
 
-Paste the following into Claude Code, Codex, Cursor, or any other coding agent, after replacing the path on the first line. The agent will register the server for you but must never ask for or handle your token; you enter that yourself in a terminal.
+Paste the following into Claude Code, Codex, Cursor, or any other coding agent. It makes the agent clone this repository from GitHub, register the server, and verify it, while leaving the token to you: the agent must never ask for or handle it, and you enter it yourself in a terminal. If you already have a checkout or an extracted release ZIP, tell the agent its absolute path and it will skip the clone.
 
 ````text
-Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, located at: /ABSOLUTE/PATH/TO/codemagic-mcp
+Set up codemagic-mcp, an unofficial community MCP server for the Codemagic API, from its GitHub repository: https://github.com/alikayhan/codemagic-mcp
 
-This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server.
+This is an unofficial, community-built MCP server for the Codemagic API, not an official Codemagic product. It is a standard stdio MCP server that runs locally with my own Codemagic API token.
 
-1. Confirm Node.js 22 or newer is on PATH (`node --version`). If not, stop and tell me how to install it.
+1. Confirm Node.js 22 or newer and git are on PATH (`node --version`, `git --version`). If either is missing, stop and tell me how to install it.
 
-2. Find the server entry point inside that path. Prefer `dist/server.mjs` if it exists (dependencies are bundled). Otherwise use `src/cli.js` after running `npm ci --ignore-scripts` in that folder. For an extracted release ZIP the file is `plugins/codemagic/dist/server.mjs`. Call the absolute path SERVER.
+2. Get the server. If I have not given you a path, clone the repository into a permanent location outside any project, for example `~/.local/share/codemagic-mcp` (ask me if you are unsure), with `git clone https://github.com/alikayhan/codemagic-mcp.git`, then run `npm ci --ignore-scripts` inside it. The entry point is `src/cli.js`; call its absolute path SERVER. If I gave you an existing checkout, use it the same way without cloning again. If I gave you an extracted release ZIP, SERVER is `plugins/codemagic/dist/server.mjs` and no `npm ci` is needed.
 
 3. Check whether credentials are already saved: `~/.config/codemagic-mcp/credentials.env` (or `$CODEMAGIC_CONFIG_DIR/credentials.env`). Report only whether the file exists. Never read, print, or ask me for the token. If it does not exist, tell me to run `node SERVER configure` myself in a terminal and paste my Codemagic API token at its hidden prompt, then wait until I say it is done. Until then the server runs in setup mode and exposes only `cm_setup_status`.
 
@@ -119,7 +119,7 @@ This is an unofficial, community-built MCP server for the Codemagic API, not an 
 
 5. Verify the server starts: run `node SERVER --version` and confirm it prints a version. If the client supports it, reconnect MCP servers and confirm a `codemagic` server appears. If its only tool is `cm_setup_status`, the token is missing: call it, relay the steps to me, and wait. If tools such as `cm_list_teams` appear, setup is complete. If a restart is required, tell me.
 
-6. Report what you did, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `node SERVER configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me.
+6. Report what you did, where the clone lives, the exact config you added, and which of these follow-ups I can choose: by default the server can read everything plus start/cancel builds, delete caches and create artifact links; `node SERVER configure --mode read-only` restricts it to inspection, `--mode all` adds administrative writes, and `--toolset all` exposes the full API. Do not run those for me. To update later, I run `git pull` and `npm ci --ignore-scripts` in the clone.
 ````
 
 ## Coverage
