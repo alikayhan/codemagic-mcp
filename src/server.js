@@ -10,7 +10,7 @@ const SETUP_INSTRUCTIONS = 'This Codemagic server is in setup mode: no API token
 
 export function configureCommandFor(entry) {
   if (!entry) return 'node <path to server> configure';
-  return /node_modules[\\/](?:\.bin[\\/])?codemagic-mcp(?:[\\/]|$)/.test(entry) ? 'npx -y codemagic-mcp configure' : `node ${entry} configure`;
+  return /node_modules[\\/](?:@alikayhan[\\/]codemagic-mcp|\.bin[\\/]codemagic-mcp)(?:[\\/]|$)/.test(entry) ? 'npx -y @alikayhan/codemagic-mcp configure' : `node ${entry} configure`;
 }
 
 function setupStatus(config) {

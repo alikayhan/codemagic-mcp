@@ -37,6 +37,6 @@ jobs:
           files: |
             release/codemagic-plugin-*.zip
             release/codemagic-plugin-*.zip.sha256
-            codemagic-mcp-*.tgz
+            alikayhan-codemagic-mcp-*.tgz
       - name: Publish to npm
         run: npm publish --provenance --access public --ignore-scripts

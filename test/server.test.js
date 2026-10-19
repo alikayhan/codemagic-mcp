@@ -283,9 +283,9 @@ test('without a token the server runs in setup mode with a single status tool', 
 });
 
 test('setup mode suggests the npm form of configure when running from an npm install', () => {
-  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/codemagic-mcp/src/cli.js'), 'npx -y codemagic-mcp configure');
-  assert.equal(configureCommandFor('C:\\Users\\me\\AppData\\Roaming\\npm\\node_modules\\codemagic-mcp\\src\\cli.js'), 'npx -y codemagic-mcp configure');
-  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/.bin/codemagic-mcp'), 'npx -y codemagic-mcp configure');
+  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/@alikayhan/codemagic-mcp/src/cli.js'), 'npx -y @alikayhan/codemagic-mcp configure');
+  assert.equal(configureCommandFor('C:\\Users\\me\\AppData\\Roaming\\npm\\node_modules\\@alikayhan\\codemagic-mcp\\src\\cli.js'), 'npx -y @alikayhan/codemagic-mcp configure');
+  assert.equal(configureCommandFor('/home/me/.npm/_npx/abc/node_modules/.bin/codemagic-mcp'), 'npx -y @alikayhan/codemagic-mcp configure');
   assert.equal(configureCommandFor('/opt/codemagic-mcp/src/cli.js'), 'node /opt/codemagic-mcp/src/cli.js configure');
   assert.equal(configureCommandFor(undefined), 'node <path to server> configure');
 });
