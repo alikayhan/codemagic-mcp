@@ -42,8 +42,8 @@ try {
         assert.equal(tools[0].name, 'cm_setup_status');
         const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
         assert.equal(result.structuredContent.configured, false);
-        assert.match(result.content[0].text, /server\.mjs configure/);
-        assert.match(result.content[0].text, new RegExp(env.CODEMAGIC_CONFIG_DIR.replaceAll('\\', '\\\\').replaceAll('/', '[/\\\\]')));
+        assert.match(result.structuredContent.configureCommand, /server\.mjs configure$/);
+        assert.equal(result.structuredContent.credentialsPath, join(env.CODEMAGIC_CONFIG_DIR, 'credentials.env'));
       }
     } finally { await client.close(); }
   }

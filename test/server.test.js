@@ -285,6 +285,6 @@ test('real stdio process without a token initializes in setup mode and points to
   const { tools } = await client.listTools();
   assert.deepEqual(tools.map(tool => tool.name), ['cm_setup_status']);
   const result = await client.callTool({ name: 'cm_setup_status', arguments: {} });
-  assert.match(result.content[0].text, /src\/cli\.js configure/);
-  assert.match(result.content[0].text, /credentials\.env/);
+  assert.match(result.structuredContent.configureCommand, /cli\.js configure$/);
+  assert.match(result.structuredContent.credentialsPath, /credentials\.env$/);
 });
