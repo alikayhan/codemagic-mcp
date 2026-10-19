@@ -5,15 +5,20 @@ import { legacyOperations } from './legacy.js';
 
 const contract = JSON.parse(readFileSync(new URL('../schema/operations.json', import.meta.url), 'utf8'));
 export const operations = [...contract.operations, ...legacyOperations];
-const ajv = new Ajv({ strict: false, allErrors: false, validateFormats: true });
+const ajv = new Ajv({ strict: false });
 addFormats(ajv);
 const validators = new Map();
-export function validateInput(operation, input) {
+/** Compiles an operation's input schema once with the runtime Ajv settings. */
+export function compileInput(operation) {
   let validate = validators.get(operation.name);
   if (!validate) {
     validate = ajv.compile(operation.inputSchema);
     validators.set(operation.name, validate);
   }
+  return validate;
+}
+export function validateInput(operation, input) {
+  const validate = compileInput(operation);
   if (!validate(input)) {
     // Do not echo submitted values, which may contain secrets.
     throw new Error(`Invalid arguments: ${ajv.errorsText(validate.errors, { dataVar: 'arguments' })}`);
