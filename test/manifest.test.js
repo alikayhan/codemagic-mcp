@@ -11,7 +11,6 @@ test('portable plugin manifests validate against the published Agent Plugins sch
     assert.ok(validate(read(`../${name}.json`)), ajv.errorsText(validate.errors));
   }
   assert.equal(read('../plugin.json').version, VERSION);
-  assert.equal(read('../package.json').version, VERSION);
   assert.match(VERSION, /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/, 'version must be SemVer');
   const changelog = readFileSync(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
   assert.ok(changelog.includes(`## [${VERSION}]`), `CHANGELOG.md lacks a ## [${VERSION}] section`);

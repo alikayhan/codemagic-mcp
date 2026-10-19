@@ -18,6 +18,8 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 - Default `CODEMAGIC_MODE` is now `builds` instead of `read-only`, and `builds` mode now also covers deleting caches and creating public artifact links in addition to starting and cancelling builds. The everyday developer loop works out of the box; set `CODEMAGIC_MODE=read-only` for inspection only. Administrative writes still require `all`.
 - Project is named `codemagic-mcp` everywhere, including the license copyright line and the Codex plugin display names, so "Codemagic" alone only ever refers to the trademark or the API.
 - Without a token the API tools are no longer registered, so a half-configured server can no longer look ready. Previously all tools were listed and each call failed with a hint.
+- `npm run verify` runs check, test, build, and test:plugin in one step; `prepack` and CI use it. CI now runs on pushes to `main` and on pull requests instead of on every push, so a PR commit no longer runs the matrix twice.
+- `--help`, `--version`, and `configure` no longer load the MCP SDK or the operations contract.
 
 ## [0.1.0] - 2026-10-19
 

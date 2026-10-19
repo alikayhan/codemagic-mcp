@@ -52,8 +52,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_previews_by_preview_id",
@@ -84,8 +83,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_teams_audit_log_connector",
@@ -116,8 +114,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_teams_external_recipients_by_recipient_id",
@@ -153,8 +150,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_teams_invitations_by_invitation_id",
@@ -190,8 +186,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_teams_memberships_by_user_id",
@@ -227,8 +222,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_teams_subscriptions_by_subscription_id",
@@ -264,8 +258,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_tester_groups_by_tester_group_id",
@@ -296,8 +289,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_tester_groups_contacts_by_contact_id",
@@ -333,8 +325,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_user_memberships_by_team_id",
@@ -365,8 +356,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_variable_groups_by_variable_group_id",
@@ -397,8 +387,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_delete_variable_groups_variables_by_variable_id",
@@ -434,8 +423,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_apps_tester_groups",
@@ -486,8 +474,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_apps_variable_groups",
@@ -538,8 +525,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_build",
@@ -570,8 +556,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_build_actions",
@@ -622,8 +607,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_build_remote_access",
@@ -654,8 +638,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_dashboards_builds",
@@ -706,8 +689,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_dashboards_by_uuid",
@@ -739,8 +721,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_invitations_public_by_code",
@@ -771,8 +752,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_meta",
@@ -787,8 +767,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_meta_shorebird",
@@ -803,8 +782,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota",
@@ -819,8 +797,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_access_keys",
@@ -871,8 +848,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_deployments_releases",
@@ -923,8 +899,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_deployments_usage_by_metric",
@@ -1001,8 +976,7 @@
           "query"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_projects",
@@ -1053,8 +1027,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_projects_deployment_keys",
@@ -1105,8 +1078,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_ota_usage",
@@ -1172,8 +1144,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates",
@@ -1188,8 +1159,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates_deployments_releases",
@@ -1240,8 +1210,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates_deployments_usage_by_metric",
@@ -1318,8 +1287,7 @@
           "query"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates_projects",
@@ -1370,8 +1338,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates_projects_deployment_keys",
@@ -1422,8 +1389,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_over_the_air_updates_usage",
@@ -1489,8 +1455,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_previews_by_preview_id",
@@ -1521,8 +1486,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_shared_dashboards_builds",
@@ -1573,8 +1537,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_shared_dashboards_by_uuid",
@@ -1606,8 +1569,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_shared_previews_by_shared_preview_id",
@@ -1638,8 +1600,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_team",
@@ -1670,8 +1631,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_build_duration_percentiles",
@@ -1770,8 +1730,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_builds",
@@ -1837,8 +1796,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_builds_by_status",
@@ -1923,8 +1881,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_builds_by_status_over_time",
@@ -2009,8 +1966,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_queued_time_percentiles",
@@ -2109,8 +2065,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_analytics_summary",
@@ -2176,8 +2131,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_audit_log",
@@ -2208,8 +2162,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_audit_log_connector",
@@ -2240,8 +2193,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_cards",
@@ -2291,8 +2243,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_customer",
@@ -2323,8 +2274,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_external_recipients",
@@ -2375,8 +2325,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_invitations",
@@ -2427,8 +2376,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_invoices",
@@ -2478,8 +2426,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_members",
@@ -2559,8 +2506,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_previews",
@@ -2611,8 +2557,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_subscriptions",
@@ -2643,8 +2588,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_subscriptions_by_subscription_id",
@@ -2680,8 +2624,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_subscriptions_invoice_preview",
@@ -2717,8 +2660,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_subscriptions_invoices",
@@ -2773,8 +2715,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_teams_variable_groups",
@@ -2825,8 +2766,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_tester_groups_by_tester_group_id",
@@ -2857,8 +2797,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_tester_groups_contacts",
@@ -2909,8 +2848,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_user",
@@ -2925,8 +2863,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_user_notifications",
@@ -2962,8 +2899,7 @@
         },
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_user_preferences",
@@ -2978,8 +2914,7 @@
         "properties": {},
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_user_teams_permissions",
@@ -3010,8 +2945,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_variable_groups_by_variable_group_id",
@@ -3042,8 +2976,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_variable_groups_variables",
@@ -3105,8 +3038,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_get_variable_groups_variables_by_variable_id",
@@ -3142,8 +3074,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_list_apps",
@@ -3190,8 +3121,7 @@
         },
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_list_builds",
@@ -3312,8 +3242,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_list_team_apps",
@@ -3387,8 +3316,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_list_teams",
@@ -3424,8 +3352,7 @@
         },
         "required": [],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_list_workflows",
@@ -3456,8 +3383,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_patch_dashboards_by_dashboard_id",
@@ -3504,8 +3430,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_patch_subscriptions_features",
@@ -3554,8 +3479,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_patch_tester_groups_by_tester_group_id",
@@ -3599,8 +3523,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_patch_variable_groups_by_variable_group_id",
@@ -3678,8 +3601,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_patch_variable_groups_variables_by_variable_id",
@@ -3753,8 +3675,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_apps_tester_groups",
@@ -3798,8 +3719,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_apps_variable_groups",
@@ -3844,8 +3764,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_builds_preview",
@@ -3889,8 +3808,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_invitations_accept",
@@ -3921,8 +3839,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_ota_access_keys",
@@ -3974,8 +3891,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_previews_share",
@@ -4006,8 +3922,7 @@
           "path"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_external_recipients",
@@ -4054,8 +3969,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_invitations",
@@ -4121,8 +4035,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_invoice_preview",
@@ -4196,8 +4109,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_subscriptions",
@@ -4320,8 +4232,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_subscriptions_promotion_code",
@@ -4371,8 +4282,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_teams_variable_groups",
@@ -4438,8 +4348,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_tester_groups_contacts",
@@ -4486,8 +4395,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_post_variable_groups_variables",
@@ -4551,8 +4459,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_put_teams_audit_log_connector",
@@ -4610,8 +4517,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_put_teams_customer_default_payment_method",
@@ -4662,8 +4568,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_put_teams_memberships_by_user_id",
@@ -4716,8 +4621,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_put_teams_subscriptions_default_payment_method",
@@ -4773,8 +4677,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     },
     {
       "name": "cm_start_build",
@@ -4993,8 +4896,7 @@
           "body"
         ],
         "additionalProperties": false
-      },
-      "source": "v3"
+      }
     }
   ]
 }

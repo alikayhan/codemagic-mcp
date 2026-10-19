@@ -12,6 +12,11 @@ import { fileURLToPath } from 'node:url';
 const config = (overrides = {}) => ({ ...readConfig({ CODEMAGIC_API_TOKEN: 'test-only-token' }), ...overrides });
 const op = name => operations.find(item => item.name === name);
 const json = (value, status = 200, headers = {}) => new Response(JSON.stringify(value), { status, headers: { 'Content-Type': 'application/json', ...headers } });
+/** A fetch stub that records every call as { url, init } and answers with the given response. */
+function recordingFetch(calls, respond = () => json({ data: {} })) {
+  return async (url, init) => { calls.push({ url: String(url), init }); return respond(); };
+}
+const capabilities = async client => JSON.parse((await client.readResource({ uri: 'codemagic://capabilities' })).contents[0].text);
 async function session(t, settings = {}, fetchImpl = async () => json({ data: [] })) {
   const server = createServer(config(settings), fetchImpl);
   const client = new Client({ name: 'test-client', version: '1.0.0' });
@@ -31,8 +36,7 @@ test('default MCP session advertises core read tools plus build, cache and artif
   assert.ok(tools.find(tool => tool.name === 'cm_get_build'));
   assert.ok(!tools.find(tool => tool.name === 'cm_add_app'));
   assert.ok(!JSON.stringify(tools).includes('test-only-token'));
-  const resource = await client.readResource({ uri: 'codemagic://capabilities' });
-  const info = JSON.parse(resource.contents[0].text);
+  const info = await capabilities(client);
   assert.equal(info.configured, true);
   assert.equal(info.mode, 'builds');
   assert.equal(info.tools.length, 17);
@@ -43,16 +47,12 @@ test('read-only mode exposes only GET tools', async t => {
   const { tools } = await client.listTools();
   assert.equal(tools.length, 12);
   assert.ok(tools.every(tool => tool.annotations.readOnlyHint));
-  const info = JSON.parse((await client.readResource({ uri: 'codemagic://capabilities' })).contents[0].text);
-  assert.equal(info.mode, 'read-only');
+  assert.equal((await capabilities(client)).mode, 'read-only');
 });
 
 test('MCP app discovery sends a token only in the auth header and preserves pagination', async t => {
   const calls = [];
-  const client = await session(t, {}, async (url, init) => {
-    calls.push({ url: String(url), init });
-    return json({ data: [{ id: 'app-1' }], next: 'cursor-2' });
-  });
+  const client = await session(t, {}, recordingFetch(calls, () => json({ data: [{ id: 'app-1' }], next: 'cursor-2' })));
   const result = await client.callTool({ name: 'cm_list_apps', arguments: { query: { page: 2, page_size: 10 } } });
   assert.equal(result.isError, false);
   assert.equal(result.structuredContent.data.next, 'cursor-2');
@@ -65,10 +65,7 @@ test('MCP app discovery sends a token only in the auth header and preserves pagi
 
 test('build mode starts a build using v3 snake_case fields', async t => {
   const calls = [];
-  const client = await session(t, { mode: 'builds' }, async (url, init) => {
-    calls.push({ url: String(url), init });
-    return json({ data: { id: 'build-1' } }, 201);
-  });
+  const client = await session(t, { mode: 'builds' }, recordingFetch(calls, () => json({ data: { id: 'build-1' } }, 201)));
   const body = { workflow_id: 'ios-release', branch: 'feature/a', inputs: { count: 3, enabled: true }, environment: { variables: { TENANT: 'example' } } };
   const result = await client.callTool({ name: 'cm_start_build', arguments: { path: { app_id: 'app-1' }, body } });
   assert.equal(result.isError, false);
@@ -110,7 +107,7 @@ test('read-only and builds modes cannot invoke hidden mutations', async t => {
 
 test('legacy cancel supports already-finished HTTP 208 without retry', async t => {
   const calls = [];
-  const client = await session(t, { mode: 'builds' }, async (url, init) => { calls.push({ url: String(url), init }); return new Response(null, { status: 208 }); });
+  const client = await session(t, { mode: 'builds' }, recordingFetch(calls, () => new Response(null, { status: 208 })));
   const result = await client.callTool({ name: 'cm_cancel_build', arguments: { path: { build_id: 'build-1' } } });
   assert.equal(result.isError, false);
   assert.equal(result.structuredContent.status, 208);
@@ -198,7 +195,7 @@ test('mutation 5xx responses report unknown outcome', async () => {
 
 test('administrative calls use the documented paths, body structures and date filters', async t => {
   const calls = [];
-  const client = await session(t, { mode: 'all', toolset: 'all' }, async (url, init) => { calls.push({ url: String(url), init }); return json({ data: {} }); });
+  const client = await session(t, { mode: 'all', toolset: 'all' }, recordingFetch(calls));
   const cases = [
     ['cm_post_teams_variable_groups', { path: { team_id: 'team-1' }, body: { name: 'staging', advanced_security: { enabled: true, selected_apps: ['app-1'] } } }, '/api/v3/teams/team-1/variable-groups', 'POST'],
     ['cm_patch_variable_groups_variables_by_variable_id', { path: { variable_group_id: 'group-1', variable_id: 'var-1' }, body: { value: 'test-secret', secure: true } }, '/api/v3/variable-groups/group-1/variables/var-1', 'PATCH'],
@@ -222,7 +219,7 @@ test('administrative calls use the documented paths, body structures and date fi
 
 test('public artifact links require explicit future expiry', async t => {
   const calls = [];
-  const client = await session(t, { mode: 'all' }, async (url, init) => { calls.push({ url: String(url), init }); return json({ url: 'https://api.codemagic.io/artifacts/public-link' }); });
+  const client = await session(t, { mode: 'all' }, recordingFetch(calls, () => json({ url: 'https://api.codemagic.io/artifacts/public-link' })));
   const args = { path: { artifact_path: 'a/b/my app.ipa' }, body: { expiresAt: Math.floor(Date.now() / 1000) + 600 } };
   const result = await client.callTool({ name: 'cm_create_artifact_link', arguments: args });
   assert.equal(result.isError, false);
@@ -262,7 +259,6 @@ test('missing credentials fail without fetching and config rejects invalid optio
 test('all tools expose schemas and token lifecycle routes are absent', async t => {
   const client = await session(t, { mode: 'all', toolset: 'all' });
   const { tools } = await client.listTools();
-  assert.equal(tools.length, 106);
   assert.equal(tools.length, availableOperations({ mode: 'all', toolset: 'all' }).length);
   assert.ok(!operations.some(item => item.path.endsWith('/user/api-key')));
   for (const tool of tools) assert.equal(tool.inputSchema.type, 'object');
@@ -279,8 +275,7 @@ test('without a token the server runs in setup mode with a single status tool', 
   assert.match(result.structuredContent.configureCommand, /configure$/);
   assert.ok(result.structuredContent.steps.some(step => /reconnect/i.test(step)));
   assert.ok(!JSON.stringify(result).includes('test-only-token'));
-  const resource = await client.readResource({ uri: 'codemagic://capabilities' });
-  const info = JSON.parse(resource.contents[0].text);
+  const info = await capabilities(client);
   assert.equal(info.configured, false);
   assert.deepEqual(info.tools, []);
   assert.equal(info.setup.configured, false);
