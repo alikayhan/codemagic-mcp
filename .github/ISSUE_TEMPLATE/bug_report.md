@@ -5,7 +5,7 @@ labels: bug
 ---
 
 **Version and environment**
-- codemagic-mcp version (`node SERVER --version`):
+- codemagic-mcp version (`npx -y @alikayhan/codemagic-mcp --version`):
 - Install method (checkout / release ZIP / Codex plugin):
 - MCP client and version:
 - OS and Node.js version (`node --version`):

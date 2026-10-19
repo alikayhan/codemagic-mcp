@@ -8,9 +8,16 @@ This is an unofficial community project with no affiliation to Codemagic or Neve
 
 ## [Unreleased]
 
+### Added
+
+- The package is published to npm as `@alikayhan/codemagic-mcp`; the unscoped name is blocked by npm as too similar to an existing package. The release workflow publishes it with provenance through npm trusted publishing after creating the GitHub Release.
+- Install instructions for Codex (`codex mcp add`), Pi (`pi mcp add`) and OpenCode (`opencode.json`).
+
 ### Changed
 
-- The coding-agent setup prompt in README.md and INSTALL.md now starts by cloning the GitHub repository instead of assuming a pre-existing local path.
+- `npx -y @alikayhan/codemagic-mcp` is now the documented default way to run the server in every client. A repository checkout and the release ZIP remain supported alternatives.
+- When the server runs from an npm installation, `cm_setup_status` suggests `npx -y @alikayhan/codemagic-mcp configure` instead of a path inside the npm cache.
+- The coding-agent setup prompt in README.md and INSTALL.md now registers the npm package instead of cloning the repository.
 
 ## [0.1.0] - 2026-10-19
 
