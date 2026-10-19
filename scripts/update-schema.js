@@ -76,7 +76,7 @@ for (const [path, methods] of Object.entries(spec.paths)) {
     }
     if (name === 'cm_start_build' && !schema.required.includes('body')) schema.required.push('body');
     operations.push({ name, method: method.toUpperCase(), path, origin: 'https://codemagic.io', description: op.summary || key,
-      core: Boolean(aliases[key]), buildAction: name === 'cm_start_build', inputSchema: schema, source: 'v3' });
+      core: Boolean(aliases[key]), buildAction: name === 'cm_start_build', inputSchema: schema });
   }
 }
 if (new Set(operations.map(op => op.name)).size !== operations.length) throw new Error('Duplicate tool names; add explicit aliases.');
