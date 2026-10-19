@@ -43,7 +43,7 @@ export function saveSettings(token, options = {}, env = process.env) {
   const settings = {
     ...existing,
     CODEMAGIC_API_TOKEN: token,
-    CODEMAGIC_MODE: options.mode ?? existing.CODEMAGIC_MODE ?? 'read-only',
+    CODEMAGIC_MODE: options.mode ?? existing.CODEMAGIC_MODE ?? 'builds',
     CODEMAGIC_TOOLSET: options.toolset ?? existing.CODEMAGIC_TOOLSET ?? 'core',
   };
   readConfig(settings);
